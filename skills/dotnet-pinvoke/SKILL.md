@@ -1,26 +1,13 @@
 ---
 name: dotnet-pinvoke
-description: Correctly call native (C/C++) libraries from .NET using P/Invoke and LibraryImport. Covers function signatures, string marshalling, memory lifetime, SafeHandle, and cross-platform patterns. Use when writing or reviewing any managed-to-native boundary code.
+description: Correctly call native (C/C++) libraries from .NET using P/Invoke and LibraryImport. Covers function signatures, string marshalling, memory lifetime, SafeHandle, and cross-platform patterns. Use when (1) writing new P/Invoke or LibraryImport declarations, (2) reviewing or debugging existing native interop code, (3) wrapping a C or C++ library for use in .NET, or (4) diagnosing crashes, memory leaks, or corruption at the managed/native boundary. Do not use for COM interop, C++/CLI mixed-mode assemblies, or pure managed code with no native dependencies.
 ---
 
 # .NET P/Invoke
 
-Calling native code from .NET is powerful but unforgiving. Incorrect signatures, garbled strings, and leaked or accessing freed memory are three of the most common sources of bugs; all of them can manifest as intermittent crashes, silent data corruption, or access violations that appear far from the actual defect.
+Calling native code from .NET is powerful but unforgiving. Incorrect signatures, garbled strings, and leaked or freed memory are the most common sources of bugs — all can manifest as intermittent crashes, silent data corruption, or access violations far from the actual defect.
 
-This skill covers both `DllImport` (available since .NET Framework 1.0) and `LibraryImport` (source-generated, .NET 7+). Both are covered equally because many codebases target older TFMs or must maintain existing `DllImport` declarations. When targeting .NET Framework, always use `DllImport`. When targeting .NET 7+, prefer `LibraryImport` for new code. When native AOT is a requirement, `LibraryImport` is the only option.
-
-## When to Use
-
-- Writing new P/Invoke or `LibraryImport` declarations
-- Reviewing or debugging existing native interop code
-- Wrapping a C or C++ library for use in .NET
-- Diagnosing crashes, memory leaks, or corruption at the managed/native boundary
-
-## When Not to Use
-
-- COM interop (different lifetime and threading model)
-- C++/CLI mixed-mode assemblies (avoid in new code; C# interop is faster and more portable)
-- Pure managed code with no native dependencies
+This skill covers both `DllImport` (available since .NET Framework 1.0) and `LibraryImport` (source-generated, .NET 7+). When targeting .NET Framework, always use `DllImport`. When targeting .NET 7+, prefer `LibraryImport` for new code. When native AOT is a requirement, `LibraryImport` is the only option.
 
 ## Inputs
 
@@ -45,30 +32,19 @@ This skill covers both `DllImport` (available since .NET Framework 1.0) and `Lib
 | **Error handling** | `SetLastError` | `SetLastPInvokeError` |
 | **Availability** | .NET Framework 1.0+ | .NET 7+ only |
 
-Use `LibraryImport` for new code on .NET 7+. Use `DllImport` for .NET Framework, .NET Standard, or earlier .NET Core.
-
 ### Step 2: Map Native Types to .NET Types
 
-This is where most bugs originate. Every parameter must match exactly.
+The most dangerous mappings — these cause the majority of bugs:
 
-| C / Win32 Type | .NET Type | Notes |
-|----------------|-----------|-------|
-| `int` | `int` | Always 32-bit in Win32 ABI |
-| `int32_t` | `int` | |
-| `uint32_t` | `uint` | |
-| `int64_t` | `long` | |
-| `uint64_t` | `ulong` | |
-| `HRESULT` | `int` | Some tools project this as an enumeration |
-| `long` | **`CLong`** | C `long` is 32-bit on Windows, 64-bit on 64-bit Unix — never use `int` or `long`. With `LibraryImport`, requires `[assembly: DisableRuntimeMarshalling]` or you get SYSLIB1051. With `DllImport`, works without it |
+| C / Win32 Type | .NET Type | Why |
+|----------------|-----------|-----|
+| `long` | **`CLong`** | 32-bit on Windows, 64-bit on 64-bit Unix. With `LibraryImport`, requires `[assembly: DisableRuntimeMarshalling]` |
 | `size_t` | `nuint` | Pointer-sized. Never use `ulong` |
-| `intptr_t` | `nint` | Pointer-sized |
 | `BOOL` (Win32) | `int` | Not `bool` — Win32 `BOOL` is 4 bytes |
 | `bool` (C99) | `[MarshalAs(UnmanagedType.U1)] bool` | Must specify 1-byte marshal |
 | `HANDLE`, `HWND` | `SafeHandle` | Prefer over raw `IntPtr` |
-| `LPWSTR` / `wchar_t*` | `string` | Must specify UTF-16 encoding |
-| `LPSTR` / `char*` | `string` | Must specify ANSI or UTF-8 encoding |
-| `void*` | `void*` | |
-| `DWORD` | `uint` | |
+
+**For the complete type mapping table, struct layout, and blittable type rules**, see [references/type-mapping.md](references/type-mapping.md).
 
 ### Step 3: Write the Declaration
 
@@ -124,10 +100,10 @@ internal static partial int ProcessRecords(
 ### Step 4: Handle Strings Correctly
 
 1. **Know what encoding the native function expects.** There is no safe default.
-2. **Windows APIs:** Always call the `W` (UTF-16) variant when the function expects a wide string. The `A` variant needs a specific reason and explicit ANSI encoding. The `A` also supports UTF-8 on Windows 10 1903+ if the system code page is UTF-8, but relying on that is fragile and not recommended.
+2. **Windows APIs:** Always call the `W` (UTF-16) variant. The `A` variant needs a specific reason and explicit ANSI encoding.
 3. **Cross-platform C libraries:** Usually expect UTF-8.
 4. **Specify encoding explicitly.** Never rely on `CharSet.Auto`.
-5. **Never introduce `StringBuilder` for output buffers.** It has poor performance semantics and is not suitable for general-purpose string buffers.
+5. **Never introduce `StringBuilder` for output buffers.**
 
 ```csharp
 // DllImport — Windows API (UTF-16)
@@ -151,7 +127,7 @@ internal static partial int GetModuleFileNameW(
 internal static partial int SetName(string name);
 ```
 
-**String lifetime warning:** Marshalled strings are freed after the call returns. If native code stores the pointer (instead of copying), you must agree on the allocator and the lifetime must be manually managed. On Windows or when targeting .NET Framework the COM related `CoTaskMemAlloc`/`CoTaskMemFree` should be the first choice for cross-boundary ownership, but the library may have its own allocator that must be used instead. On non-Windows target, using the `NativeMemory` APIs are the best option for cross-boundary ownership.
+**String lifetime warning:** Marshalled strings are freed after the call returns. If native code stores the pointer (instead of copying), the lifetime must be manually managed. On Windows or .NET Framework, `CoTaskMemAlloc`/`CoTaskMemFree` is the first choice for cross-boundary ownership; on non-Windows targets, use `NativeMemory` APIs. The library may have its own allocator that must be used instead.
 
 ### Step 5: Establish Memory Ownership
 
@@ -189,7 +165,7 @@ public static string GetVersion()
 }
 ```
 
-**Critical rule:** Always free with the matching allocator. Never use `Marshal.FreeHGlobal` or `Marshal.FreeCoTaskMem` on `malloc`'d memory — they use different heaps.
+**Critical rule:** Always free with the matching allocator. Never use `Marshal.FreeHGlobal` or `Marshal.FreeCoTaskMem` on `malloc`'d memory.
 
 **Model 3 — Handle-based (callee allocates, callee frees):** Use `SafeHandle` (see Step 6).
 
@@ -260,12 +236,9 @@ Marshal.ThrowExceptionForHR(hr);
 
 ### Step 8: Handle Callbacks (if needed)
 
-**Preferred (.NET 5+): `UnmanagedCallersOnly`** — avoids delegates entirely, so there is no GC lifetime risk:
+**Preferred (.NET 5+): `UnmanagedCallersOnly`** — avoids delegates entirely, no GC lifetime risk:
 
 ```csharp
-// C: typedef void (*log_callback)(int level, const char* message);
-// C: void set_log_callback(log_callback cb);
-
 [UnmanagedCallersOnly]
 private static void LogCallback(int level, IntPtr message)
 {
@@ -273,21 +246,18 @@ private static void LogCallback(int level, IntPtr message)
     Console.WriteLine($"[{level}] {msg}");
 }
 
-// Pass the function pointer directly — no delegate, no GC concern
 [LibraryImport("mylib")]
 private static unsafe partial void SetLogCallback(
     delegate* unmanaged<int, IntPtr, void> cb);
 
-// Usage:
 unsafe { SetLogCallback(&LogCallback); }
 ```
 
-The method must be `static`, must not throw exceptions back to native code, and can only use blittable parameter types. `UnmanagedCallersOnly` methods cannot be called from managed code directly.
+The method must be `static`, must not throw exceptions back to native code, and can only use blittable parameter types.
 
 **Fallback (older TFMs or when instance state is needed): delegate with rooting**
 
 ```csharp
-// C: typedef void (*log_callback)(int level, const char* message);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)] // Only needed on Windows x86
 private delegate void LogCallbackDelegate(int level, IntPtr message);
 
@@ -309,54 +279,9 @@ If native code stores the function pointer, the delegate **must** stay rooted fo
 
 ---
 
-## Blittable Structs
-
-Blittable types have identical managed and native layouts — zero marshalling overhead.
-
-**Blittable:** `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `float`, `double`, `nint`, `nuint`, and structs of only blittable fields. With `[assembly: DisableRuntimeMarshalling]`, `bool` (1 byte) and `char` (2 bytes, `char16_t`) are also treated as blittable.
-
-**Not blittable (without `DisableRuntimeMarshalling`):** `bool`, `char`, `string`, `decimal`, anything with `MarshalAs`.
-
-```csharp
-[StructLayout(LayoutKind.Sequential)]
-internal struct Vec3 { public float X, Y, Z; }
-
-[LibraryImport("physics")]
-internal static partial void TransformVectors(Span<Vec3> vectors, nuint count, in Vec3 t);
-```
-
-### Explicit Layout (Unions)
-
-```csharp
-// C: typedef union { int32_t i; float f; } Value;
-[StructLayout(LayoutKind.Explicit, Size = 4)]
-internal struct Value
-{
-    [FieldOffset(0)] public int I;
-    [FieldOffset(0)] public float F;
-}
-```
-
-### Packing
-
-If the native struct uses non-default packing, match it:
-
-```csharp
-// C: #pragma pack(push, 1)
-[StructLayout(LayoutKind.Sequential, Pack = 1)]
-internal struct PackedHeader
-{
-    public byte Magic;
-    public uint Size;    // At offset 1, not 4
-    public ushort Flags; // At offset 5, not 8
-}
-```
-
----
-
 ## Cross-Platform Library Loading
 
-Use `NativeLibrary.SetDllImportResolver` for complex scenarios, or conditional compilation for simple cases. Use `CLong`/`CULong` for C `long`/`unsigned long` — the size differs between Windows (32-bit) and 64-bit Unix (64-bit). Note: `CLong`/`CULong` with `LibraryImport` requires `[assembly: DisableRuntimeMarshalling]`; with `DllImport` this is not needed.
+Use `NativeLibrary.SetDllImportResolver` for complex scenarios, or conditional compilation for simple cases. Use `CLong`/`CULong` for C `long`/`unsigned long`. Note: `CLong`/`CULong` with `LibraryImport` requires `[assembly: DisableRuntimeMarshalling]`.
 
 ```csharp
 // Simple: conditional compilation
@@ -398,7 +323,7 @@ For codebases targeting .NET 7+, migrating provides AOT compatibility and trimmi
 5. Remove `CallingConvention` unless targeting Windows x86
 6. Build and fix `SYSLIB1054`–`SYSLIB1057` analyzer warnings
 
-Enable the interop analyzers in your project:
+Enable the interop analyzers:
 
 ```xml
 <PropertyGroup>
@@ -413,29 +338,15 @@ Enable the interop analyzers in your project:
 
 ### CsWin32 (Win32 APIs)
 
-For Win32 P/Invoke, prefer [Microsoft.Windows.CsWin32](https://github.com/microsoft/CsWin32) over hand-written signatures. It source-generates correct, `LibraryImport`-compatible declarations from metadata — eliminating the most common signature bugs.
+For Win32 P/Invoke, prefer [Microsoft.Windows.CsWin32](https://github.com/microsoft/CsWin32) over hand-written signatures. It source-generates correct declarations from metadata. Add a `NativeMethods.txt` listing the APIs you need:
 
 ```bash
 dotnet add package Microsoft.Windows.CsWin32
 ```
 
-Create a `NativeMethods.txt` file in your project root listing the APIs you need, one per line:
-
-```text
-CreateFile
-ReadFile
-CloseHandle
-```
-
-The generator produces correct signatures including `SafeHandle` wrappers, correct struct layouts, and proper `SetLastError` usage. No manual type mapping required.
-
 ### CsWinRT (WinRT APIs)
 
-For WinRT interop, use [Microsoft.Windows.CsWinRT](https://github.com/microsoft/CsWinRT). It generates .NET projections from Windows Runtime metadata (`.winmd` files), providing type-safe access to WinRT APIs without manual interop code.
-
-```bash
-dotnet add package Microsoft.Windows.CsWinRT
-```
+For WinRT interop, use [Microsoft.Windows.CsWinRT](https://github.com/microsoft/CsWinRT) to generate .NET projections from `.winmd` files.
 
 ---
 
@@ -466,44 +377,7 @@ dotnet add package Microsoft.Windows.CsWinRT
 3. **Round-trip test** — call the native function with known inputs and verify expected outputs
 4. **Test with non-ASCII strings** — pass strings containing characters outside the ASCII range to confirm encoding is correct
 
-## Common Pitfalls
+## Reference Files
 
-| Pitfall | Impact | Solution |
-|---------|--------|----------|
-| `int` for `size_t` | Stack corruption on 64-bit | Use `nuint` |
-| `long` for C `long` | Wrong on Windows (32-bit) | Use `CLong` / `CULong` (with `LibraryImport`, requires `[assembly: DisableRuntimeMarshalling]`) |
-| `bool` without `MarshalAs` | Wrong marshal size | Specify `UnmanagedType.Bool` (4B) or `U1` (1B) |
-| Implicit string encoding | Corrupts non-ASCII | Always specify `CharSet` or `StringMarshalling` |
-| Wrong allocator for free | Heap corruption | Use the library's own free function |
-| Raw `IntPtr` for handles | Leaks on exception | Use `SafeHandle` subclass |
-| Delegate callback GC'd | Crash in native code | Keep a rooted reference for the delegate's lifetime |
-| Missing `SetLastError` | Stale error codes | Set `SetLastError = true` on Win32 APIs |
-| Struct packing mismatch | Fields at wrong offsets | Match `Pack` to native `#pragma pack` |
-| Managed object as `void*` | Object moves during GC | Pin with `GCHandle` or `fixed` |
-
-## Failure Modes and Recovery
-
-| Symptom | Likely Cause | Diagnosis |
-|---------|-------------|-----------|
-| `DllNotFoundException` | Library not found at runtime | Check library name, path, and platform. Use `NativeLibrary.TryLoad` to test loading manually. On Linux, verify `LD_LIBRARY_PATH` or `rpath`. |
-| `EntryPointNotFoundException` | Export name mismatch | Inspect the native binary's export table (`dumpbin /exports` on Windows, `nm -D` on Linux). Check for name mangling (C++ without `extern "C"`). |
-| `AccessViolationException` | Signature mismatch, use-after-free, or missing pinning | Compare managed and native signatures byte-for-byte. Check struct sizes with `Marshal.SizeOf<T>()` vs native `sizeof`. Verify memory lifetime. |
-| Silent data corruption | Wrong type size or encoding | Add temporary logging at the boundary. Compare `Marshal.SizeOf<T>()` to native struct size. Test with known input/output pairs. |
-| Intermittent crashes | GC moved an unpinned object or collected a delegate | Ensure callbacks are rooted. Use `GCHandle` or `fixed` for any pointer held across calls. Run under a debugger with managed debugging assistants (MDAs) enabled. |
-| Heap corruption on free | Wrong allocator | Confirm which allocator the native side used and free with the matching function. Never mix `malloc`/`free` with `CoTaskMemAlloc`/`CoTaskMemFree` or `Marshal.FreeHGlobal`. |
-
-**General debugging approach:**
-
-1. Reproduce under a debugger with native and managed debugging enabled
-2. On .NET 5+, set `COMPlus_EnableDiagnostics=1` and use dotnet-dump or dotnet-trace for post-mortem analysis
-3. Verify struct layout: `Marshal.SizeOf<T>()` must equal the native `sizeof` for every struct crossing the boundary
-4. (.NET Framework only) Enable [Managed Debugging Assistants](https://learn.microsoft.com/en-us/dotnet/framework/debug-trace-profile/diagnosing-errors-with-managed-debugging-assistants) (MDAs) for `pInvokeStackImbalance` and `invalidOverlappedToPinvoke`
-
-## Resources
-
-- [P/Invoke](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke)
-- [LibraryImport source generation](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke-source-generation)
-- [Type marshalling](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/type-marshalling)
-- [SafeHandle](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle)
-- [NativeLibrary](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.nativelibrary)
-- [Best practices](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/best-practices)
+- **[references/type-mapping.md](references/type-mapping.md)** — Complete native-to-.NET type mapping table, struct layout patterns, blittable type rules
+- **[references/diagnostics.md](references/diagnostics.md)** — Common pitfalls, failure modes and recovery, debugging approach, external resources
