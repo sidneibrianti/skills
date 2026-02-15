@@ -12,7 +12,7 @@
 
 ### 👤 User
 
-I need to convert this entire repository to Central Package Management. The solution is at Enterprise.sln. There are some complications: package versions defined as MSBuild properties, conditional package references for multi-targeting, and a shared Common.props that adds a package to all projects.
+I need to convert this entire repository to Central Package Management. The solution is at Enterprise.slnx. There are some complications: package versions defined as MSBuild properties, conditional package references for multi-targeting, and a shared Common.props that adds a package to all projects.
 
 ---
 
@@ -34,7 +34,7 @@ Skill "convert-to-cpm" loaded successfully. Follow the instructions in the skill
 
 **List solution projects**
 
-$ dotnet sln Enterprise.sln list
+$ dotnet sln Enterprise.slnx list
 
 ```
 Web/Web.csproj
@@ -342,7 +342,7 @@ $ grep -rn "BlobsVersion" --include="*.csproj" --include="*.props" --include="*.
 
 **Restore solution**
 
-$ dotnet restore Enterprise.sln
+$ dotnet restore Enterprise.slnx
 
 ```
   Determining projects to restore...
@@ -431,7 +431,7 @@ The `baseline.binlog` and `after-cpm.binlog` files are available for manual insp
 I recommend running your full test suite:
 
 ```bash
-dotnet test Enterprise.sln
+dotnet test Enterprise.slnx
 ```
 
 ---
