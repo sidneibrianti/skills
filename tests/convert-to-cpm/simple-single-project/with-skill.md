@@ -42,7 +42,10 @@ I'll convert your project to Central Package Management. Let me start by establi
 
 **Establish baseline build and capture package snapshot**
 
-$ cd MyApp && dotnet clean && dotnet build -bl:baseline.binlog && dotnet list package --format json > baseline-packages.json
+$ cd MyApp
+$ dotnet clean
+$ dotnet build -bl:baseline.binlog
+$ dotnet list package --format json > baseline-packages.json
 
 ```
 Build succeeded.
@@ -111,21 +114,50 @@ $ cat MyApp/MyApp.csproj
 - No conditional PackageReference items
 - No existing CPM configuration
 
-This is a straightforward conversion. Since this is a single project, I'll place `Directory.Packages.props` in the `MyApp/` directory alongside the project file.
+This is a straightforward conversion. Since this is a single project, where would you like me to place `Directory.Packages.props`?
+- In the `MyApp/` directory alongside the project file, or
+- In a parent directory if you plan to add more projects later?
+
+---
+
+<sub>⏱️ 43s</sub>
+
+### 👤 User
+
+In the MyApp/ directory is fine.
 
 ---
 
 <sub>⏱️ 45s</sub>
 
-### ✅ `create`
+### 💬 Copilot
 
-**create a new file at MyApp/Directory.Packages.props.**
+Got it. I'll create `Directory.Packages.props` in `MyApp/` using `dotnet new packagesprops` and then add the package entries.
+
+---
+
+<sub>⏱️ 48s</sub>
+
+### ✅ `bash`
+
+**Create Directory.Packages.props**
+
+$ cd MyApp && dotnet new packagesprops
+
+```
+The template "Central Package Management File" was created successfully.
+<exited with exit code 0>
+```
+
+---
+
+<sub>⏱️ 52s</sub>
+
+### ✅ `edit`
+
+**Add PackageVersion entries to MyApp/Directory.Packages.props**
 
 MyApp/Directory.Packages.props
-
-```
-Created file MyApp/Directory.Packages.props with 365 characters
-```
 
 The file contents:
 
@@ -136,8 +168,8 @@ The file contents:
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.0" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
     <PackageVersion Include="Polly" Version="8.5.0" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 </Project>
 ```
@@ -180,7 +212,10 @@ $ cd MyApp && dotnet restore
 
 **Build project and capture post-conversion snapshot**
 
-$ cd MyApp && dotnet clean && dotnet build -bl:after-cpm.binlog && dotnet list package --format json > after-cpm-packages.json
+$ cd MyApp
+$ dotnet clean
+$ dotnet build -bl:after-cpm.binlog
+$ dotnet list package --format json > after-cpm-packages.json
 
 ```
 Build succeeded.
@@ -197,13 +232,15 @@ Build succeeded.
 
 **Package comparison (baseline → after CPM):**
 
-| Project | Package | Before | After | Status |
-|---------|---------|--------|-------|--------|
-| MyApp | Microsoft.Extensions.Logging | 9.0.0 | 9.0.0 | Unchanged |
-| MyApp | Polly | 8.5.0 | 8.5.0 | Unchanged |
-| MyApp | System.Text.Json | 9.0.0 | 9.0.0 | Unchanged |
+No version changes detected — the conversion is fully version-neutral.
 
-All resolved versions are identical — the conversion is version-neutral.
+**Unchanged:**
+
+| Project | Package | Version |
+|---------|---------|---------|
+| MyApp | Microsoft.Extensions.Logging | 9.0.0 |
+| MyApp | Polly | 8.5.0 |
+| MyApp | System.Text.Json | 9.0.0 |
 
 **Conversion complete.** Summary:
 

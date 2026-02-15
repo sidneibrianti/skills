@@ -50,7 +50,9 @@ Data/Data.csproj
 
 **Establish baseline build and capture package snapshot**
 
-$ dotnet clean && dotnet build -bl:baseline.binlog && dotnet list package --format json > baseline-packages.json
+$ dotnet clean Platform.slnx
+$ dotnet build Platform.slnx -bl:baseline.binlog
+$ dotnet list Platform.slnx package --format json > baseline-packages.json
 
 ```
 Build succeeded.
@@ -158,10 +160,10 @@ The file contents:
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.24" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.24" />
   </ItemGroup>
 </Project>
 ```
@@ -244,7 +246,9 @@ $ dotnet restore Platform.sln
 
 **Build solution and capture post-conversion snapshot**
 
-$ dotnet clean && dotnet build -bl:after-cpm.binlog && dotnet list package --format json > after-cpm-packages.json
+$ dotnet clean Platform.slnx
+$ dotnet build Platform.slnx -bl:after-cpm.binlog
+$ dotnet list Platform.slnx package --format json > after-cpm-packages.json
 
 ```
 Build succeeded.
@@ -261,14 +265,16 @@ Build succeeded.
 
 **Package comparison (baseline → after CPM):**
 
-| Project | Package | Before | After | Status |
-|---------|---------|--------|-------|--------|
-| Api | OpenTelemetry.Extensions.Hosting | 1.15.0 | 1.15.0 | Unchanged |
-| Api | Microsoft.AspNetCore.OpenApi | 8.0.24 | 8.0.24 | Unchanged |
-| Data | Microsoft.Extensions.DependencyInjection | 9.0.0 | 9.0.0 | Unchanged |
-| Data | Microsoft.Extensions.DependencyInjection.Abstractions | 9.0.0 | 9.0.0 | Unchanged |
+No version changes detected — the conversion is fully version-neutral.
 
-All resolved versions are identical — the conversion is version-neutral.
+**Unchanged:**
+
+| Project | Package | Version |
+|---------|---------|---------|
+| Api | OpenTelemetry.Extensions.Hosting | 1.15.0 |
+| Api | Microsoft.AspNetCore.OpenApi | 8.0.24 |
+| Data | Microsoft.Extensions.DependencyInjection | 9.0.0 |
+| Data | Microsoft.Extensions.DependencyInjection.Abstractions | 9.0.0 |
 
 **Conversion complete.** Summary:
 

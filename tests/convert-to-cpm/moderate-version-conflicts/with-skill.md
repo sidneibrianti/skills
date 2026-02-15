@@ -52,7 +52,9 @@ Tests/Tests.csproj
 
 **Establish baseline build and capture package snapshot**
 
-$ dotnet clean && dotnet build -bl:baseline.binlog && dotnet list package --format json > baseline-packages.json
+$ dotnet clean Inventory.slnx
+$ dotnet build Inventory.slnx -bl:baseline.binlog
+$ dotnet list Inventory.slnx package --format json > baseline-packages.json
 
 ```
 Build succeeded.
@@ -153,8 +155,8 @@ The file contents:
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Azure.Identity" Version="1.13.2" />
-    <PackageVersion Include="System.Text.Json" Version="10.0.1" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
+    <PackageVersion Include="System.Text.Json" Version="10.0.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
   </ItemGroup>
 </Project>
@@ -230,7 +232,9 @@ $ dotnet restore Inventory.sln
 
 **Build solution and capture post-conversion snapshot**
 
-$ dotnet clean && dotnet build -bl:after-cpm.binlog && dotnet list package --format json > after-cpm-packages.json
+$ dotnet clean Inventory.slnx
+$ dotnet build Inventory.slnx -bl:after-cpm.binlog
+$ dotnet list Inventory.slnx package --format json > after-cpm-packages.json
 
 ```
 Build succeeded.
@@ -247,16 +251,23 @@ Build succeeded.
 
 **Package comparison (baseline → after CPM):**
 
+**Changes:**
+
 | Project | Package | Before | After | Status |
 |---------|---------|--------|-------|--------|
-| Api | Azure.Identity | 1.13.2 | 1.13.2 | Unchanged |
-| Api | System.Text.Json | 10.0.1 | 10.0.1 | Unchanged |
-| Shared | Azure.Identity | 1.10.0 | 1.10.0 | Via VersionOverride |
-| Shared | System.Text.Json | 10.0.1 | 10.0.1 | Unchanged |
-| Tests | System.Text.Json | 10.0.1 | 10.0.1 | Unchanged |
-| Tests | xunit | 2.9.3 | 2.9.3 | Unchanged |
-| Worker | OpenTelemetry.Extensions.Hosting | 1.15.0 | 1.15.0 | Unchanged |
+| Shared | Azure.Identity | 1.10.0 | 1.10.0 | VersionOverride |
 | Worker | System.Text.Json | 8.0.4 | 10.0.1 | ⚠️ Aligned (also resolves CVE-2024-43485) |
+
+**Unchanged:**
+
+| Project | Package | Version |
+|---------|---------|---------|
+| Api | Azure.Identity | 1.13.2 |
+| Api | System.Text.Json | 10.0.1 |
+| Shared | System.Text.Json | 10.0.1 |
+| Tests | System.Text.Json | 10.0.1 |
+| Tests | xunit | 2.9.3 |
+| Worker | OpenTelemetry.Extensions.Hosting | 1.15.0 |
 
 **1 intentional version change:** Worker System.Text.Json 8.0.4 → 10.0.1 (version alignment, also resolves CVE-2024-43485).
 

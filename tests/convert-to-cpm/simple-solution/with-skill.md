@@ -51,7 +51,9 @@ Tests/Tests.csproj
 
 **Establish baseline build and capture package snapshot**
 
-$ dotnet clean && dotnet build -bl:baseline.binlog && dotnet list package --format json > baseline-packages.json
+$ dotnet clean MyApp.slnx
+$ dotnet build MyApp.slnx -bl:baseline.binlog
+$ dotnet list MyApp.slnx package --format json > baseline-packages.json
 
 ```
 Build succeeded.
@@ -140,10 +142,10 @@ The file contents:
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.24" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
@@ -204,7 +206,9 @@ $ dotnet restore MyApp.sln
 
 **Build solution and capture post-conversion snapshot**
 
-$ dotnet clean && dotnet build -bl:after-cpm.binlog && dotnet list package --format json > after-cpm-packages.json
+$ dotnet clean MyApp.slnx
+$ dotnet build MyApp.slnx -bl:after-cpm.binlog
+$ dotnet list MyApp.slnx package --format json > after-cpm-packages.json
 
 ```
 Build succeeded.
@@ -221,16 +225,18 @@ Build succeeded.
 
 **Package comparison (baseline → after CPM):**
 
-| Project | Package | Before | After | Status |
-|---------|---------|--------|-------|--------|
-| Web | OpenTelemetry.Extensions.Hosting | 1.15.0 | 1.15.0 | Unchanged |
-| Web | Microsoft.AspNetCore.OpenApi | 8.0.24 | 8.0.24 | Unchanged |
-| Core | System.Text.Json | 9.0.0 | 9.0.0 | Unchanged |
-| Tests | Microsoft.NET.Test.Sdk | 17.12.0 | 17.12.0 | Unchanged |
-| Tests | xunit | 2.9.3 | 2.9.3 | Unchanged |
-| Tests | xunit.runner.visualstudio | 2.8.2 | 2.8.2 | Unchanged |
+No version changes detected — the conversion is fully version-neutral.
 
-All resolved versions are identical — the conversion is version-neutral.
+**Unchanged:**
+
+| Project | Package | Version |
+|---------|---------|---------|
+| Web | OpenTelemetry.Extensions.Hosting | 1.15.0 |
+| Web | Microsoft.AspNetCore.OpenApi | 8.0.24 |
+| Core | System.Text.Json | 9.0.0 |
+| Tests | Microsoft.NET.Test.Sdk | 17.12.0 |
+| Tests | xunit | 2.9.3 |
+| Tests | xunit.runner.visualstudio | 2.8.2 |
 
 **Conversion complete.** Summary:
 

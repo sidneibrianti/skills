@@ -40,36 +40,32 @@ Compare `baseline-packages.json` and `after-cpm-packages.json` per project. For 
 4. **VersionOverride entries**: Packages that use `VersionOverride` (their version matches baseline but the mechanism changed).
 5. **Transitive changes**: If `CentralPackageTransitivePinningEnabled` was set, note any transitive packages that are now pinned.
 
-### Changes table
+### Example comparison tables
 
-Present all packages with differences first:
+Present changes and unchanged packages in separate tables. The **Changes** table highlights anything that differs from baseline — version bumps, security fixes, `VersionOverride` entries, and added/removed packages. The **Unchanged** table lists everything else for reference and confidence.
+
+**Changes:**
 
 ```
-| Project | Package | Baseline | After CPM | Change |
-|---------|---------|----------|-----------|--------|
+| Project | Package | Before | After | Status |
+|---------|---------|--------|-------|--------|
 | Legacy.csproj | System.Text.Json | 8.0.4 | 8.0.5 | ⚠️ Security fix (CVE-2024-43485) |
 | Core.csproj | System.Text.Json | 9.0.0 | 9.0.0 | VersionOverride |
 | Shared.csproj | Azure.Identity | 1.10.0 | 1.10.0 | VersionOverride |
-| Api.csproj | SomePackage | 2.0.0 | — | ❌ Removed |
-| Api.csproj | NewPackage | — | 1.0.0 | ➕ Added |
 ```
 
-### Unchanged packages table
-
-Then present all packages that resolved to the same version, confirming version-neutral conversion:
+**Unchanged:**
 
 ```
 | Project | Package | Version |
 |---------|---------|---------|
 | Api.csproj | System.Text.Json | 10.0.1 |
 | Api.csproj | Azure.Storage.Blobs | 12.24.0 |
-| Web.csproj | System.Text.Json | 10.0.1 |
 | Web.csproj | OpenTelemetry.Extensions.Hosting | 1.15.0 |
 | Tests.csproj | xunit | 2.9.3 |
-| Tests.csproj | System.Text.Json | 10.0.1 |
 ```
 
-If there are no changes at all, state that the conversion is fully version-neutral.
+If there are no changes at all, state that the conversion is fully version-neutral and present only the unchanged table.
 
 ## Binlog artifacts
 

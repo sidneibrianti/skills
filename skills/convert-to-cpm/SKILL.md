@@ -116,4 +116,4 @@ Inform the user that `baseline.binlog` and `after-cpm.binlog` are available for 
 ## More Info
 
 - [Central Package Management documentation](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management)
-- [Common pitfalls and NuGet error codes](references/validation-and-errors.md)
+- [Validation and common errors](references/validation-and-errors.md)

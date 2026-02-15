@@ -11,6 +11,7 @@ Straightforward conversions where all package versions are explicit literals, th
 
 - **[simple-single-project](simple-single-project/)** — One project with a few inline-versioned PackageReference items
 - **[simple-solution](simple-solution/)** — A solution with three projects, all packages at the same versions
+- **[simple-packages-config](simple-packages-config/)** — A project using `packages.config` instead of `PackageReference` (agent should decline conversion)
 
 ## Moderate
 
