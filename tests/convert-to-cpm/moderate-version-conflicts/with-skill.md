@@ -12,7 +12,7 @@
 
 ### 👤 User
 
-Convert Inventory.sln to Central Package Management.
+Convert Inventory.slnx to Central Package Management.
 
 ---
 
@@ -34,7 +34,7 @@ Skill "convert-to-cpm" loaded successfully. Follow the instructions in the skill
 
 **List solution projects**
 
-$ dotnet sln Inventory.sln list
+$ dotnet sln Inventory.slnx list
 
 ```
 Api/Api.csproj
@@ -216,7 +216,7 @@ Tests/Tests.csproj — removed `Version` from both PackageReference items
 
 **Restore solution**
 
-$ dotnet restore Inventory.sln
+$ dotnet restore Inventory.slnx
 
 ```
   Determining projects to restore...
@@ -285,7 +285,7 @@ The `baseline.binlog` and `after-cpm.binlog` files are available for manual insp
 I recommend running your tests to verify no behavioral changes:
 
 ```bash
-dotnet test Inventory.sln
+dotnet test Inventory.slnx
 ```
 
 ---

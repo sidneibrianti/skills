@@ -34,6 +34,6 @@ Each scenario's `README.md` describes the file structure and project contents. T
 
 ## Evaluating the skill
 
-After generating the test solutions, evaluate the skill by running it against each scenario. Use the following prompt:
+If the user requests evaluation as part of testing, evaluate the skill by running it against each scenario after generating the test solutions. Use the following prompt:
 
 > Load the convert-to-cpm skill and evaluate it against each test scenario under tests/convert-to-cpm/. For each scenario, use the `src/` directory as the working context and the scenario's `README.md` input prompt. Compare the agent's output against the `with-skill.md` (expected behavior) and `without-skill.md` (baseline behavior without the skill). Report any discrepancies in workflow steps, package versions, user interactions, or comparison table format.
