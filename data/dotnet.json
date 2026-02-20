@@ -244,6 +244,33 @@
           }
         ],
         "tool": "customBiggerIsBetter"
+      },
+      {
+        "tool": "customBiggerIsBetter",
+        "date": 1771578351226,
+        "model": "claude-opus-4.6",
+        "commit": {
+          "timestamp": "2026-02-20T05:40:49+00:00",
+          "id": "527d2d5b132c3e5f1537c638e572778d70518f06",
+          "message": "fix: force array output in components.json for dashboard (#59)",
+          "author": {
+            "name": "Aditya Mandaleeka",
+            "username": "ViktorHofer"
+          },
+          "url": "https://github.com/dotnet/skills/commit/527d2d5b132c3e5f1537c638e572778d70518f06"
+        },
+        "benches": [
+          {
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "csharp-scripts/Test a C# language feature with a script - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          }
+        ]
       }
     ],
     "Efficiency": [
@@ -489,8 +516,35 @@
           }
         ],
         "tool": "customSmallerIsBetter"
+      },
+      {
+        "tool": "customSmallerIsBetter",
+        "date": 1771578351226,
+        "model": "claude-opus-4.6",
+        "commit": {
+          "timestamp": "2026-02-20T05:40:49+00:00",
+          "id": "527d2d5b132c3e5f1537c638e572778d70518f06",
+          "message": "fix: force array output in components.json for dashboard (#59)",
+          "author": {
+            "name": "Aditya Mandaleeka",
+            "username": "ViktorHofer"
+          },
+          "url": "https://github.com/dotnet/skills/commit/527d2d5b132c3e5f1537c638e572778d70518f06"
+        },
+        "benches": [
+          {
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Time",
+            "unit": "seconds",
+            "value": 32.1
+          },
+          {
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 98674.0
+          }
+        ]
       }
     ]
   },
-  "lastUpdate": 1771576088418
+  "lastUpdate": 1771578351226
 }
