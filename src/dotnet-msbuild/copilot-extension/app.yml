@@ -1,6 +1,6 @@
-// GitHub App manifest for the MSBuild Copilot Extension.
-// Use this as a reference when registering the GitHub App.
-// See: https://docs.github.com/apps/creating-github-apps
+# GitHub App manifest for the MSBuild Copilot Extension.
+# Use this as a reference when registering the GitHub App.
+# See: https://docs.github.com/apps/creating-github-apps
 
 name: MSBuild Expert
 description: >
