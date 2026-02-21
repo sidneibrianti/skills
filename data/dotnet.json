@@ -372,6 +372,53 @@
           "id": "5e0845eb1d50716e77fc9ea2e91fd5081dbb4d2e",
           "timestamp": "2026-02-20T22:01:38+00:00"
         }
+      },
+      {
+        "commit": {
+          "timestamp": "2026-02-20T23:10:00+00:00",
+          "message": "Added C# MCP Server development skills (#36)",
+          "author": {
+            "username": "ViktorHofer",
+            "name": "leslierichardson95"
+          },
+          "url": "https://github.com/dotnet/skills/commit/edd887744208a4ac6006275a0ef530884ea6d3bc",
+          "id": "edd887744208a4ac6006275a0ef530884ea6d3bc"
+        },
+        "date": 1771634637135,
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "value": 10.0,
+            "unit": "Score (0-10)",
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Quality"
+          },
+          {
+            "value": 4.599999904632568,
+            "unit": "Score (0-10)",
+            "name": "csharp-scripts/Test a C# language feature with a script - Vanilla Quality"
+          },
+          {
+            "value": 10.0,
+            "unit": "Score (0-10)",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Quality"
+          },
+          {
+            "value": 10.0,
+            "unit": "Score (0-10)",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Vanilla Quality"
+          },
+          {
+            "value": 10.0,
+            "unit": "Score (0-10)",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Quality"
+          },
+          {
+            "value": 8.600000381469727,
+            "unit": "Score (0-10)",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Vanilla Quality"
+          }
+        ],
+        "model": "claude-opus-4.5"
       }
     ],
     "Efficiency": [
@@ -745,8 +792,55 @@
           "id": "5e0845eb1d50716e77fc9ea2e91fd5081dbb4d2e",
           "timestamp": "2026-02-20T22:01:38+00:00"
         }
+      },
+      {
+        "commit": {
+          "timestamp": "2026-02-20T23:10:00+00:00",
+          "message": "Added C# MCP Server development skills (#36)",
+          "author": {
+            "username": "ViktorHofer",
+            "name": "leslierichardson95"
+          },
+          "url": "https://github.com/dotnet/skills/commit/edd887744208a4ac6006275a0ef530884ea6d3bc",
+          "id": "edd887744208a4ac6006275a0ef530884ea6d3bc"
+        },
+        "date": 1771634637135,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "value": 55.1,
+            "unit": "seconds",
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Time"
+          },
+          {
+            "value": 119448.0,
+            "unit": "tokens",
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Tokens In"
+          },
+          {
+            "value": 20.2,
+            "unit": "seconds",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Time"
+          },
+          {
+            "value": 45007.0,
+            "unit": "tokens",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Tokens In"
+          },
+          {
+            "value": 19.9,
+            "unit": "seconds",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Time"
+          },
+          {
+            "value": 45152.0,
+            "unit": "tokens",
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Tokens In"
+          }
+        ],
+        "model": "claude-opus-4.5"
       }
     ]
   },
-  "lastUpdate": 1771625949156
+  "lastUpdate": 1771634637135
 }
