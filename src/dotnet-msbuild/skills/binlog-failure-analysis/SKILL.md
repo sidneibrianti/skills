@@ -1,6 +1,6 @@
 ---
 name: binlog-failure-analysis
-description: "Skill for .NET/MSBuild *.binlog files and complicated build failures. Only activate in MSBuild/.NET build contexts (see shared/domain-check.md for signals). This skill uses binary logs for comprehensive build failure analysis."
+description: "Skill for .NET/MSBuild *.binlog files and complicated build failures. Only activate in MSBuild/.NET build context. This skill uses binary logs for comprehensive build failure analysis."
 ---
 
 # Analyzing MSBuild Failures with Binary Logs
@@ -251,22 +251,9 @@ The `search_binlog` tool supports powerful query syntax from MSBuild Structured 
 
 After identifying errors from binlog analysis, consult these specialized skills for in-depth guidance:
 
-### By Error Code Prefix
-| Error Prefix | Skill to Consult | Typical Issues |
-|-------------|-----------------|----------------|
-| `CS####` | `common-build-errors` | C# compiler errors — missing types, namespaces, type mismatches |
-| `MSB####` | `common-build-errors` | MSBuild engine errors — missing imports, SDK issues, conflicts |
-| `NU####` | `common-build-errors` + `nuget-restore-failures` | NuGet errors — package resolution, feed issues, version conflicts |
-| `NETSDK####` | `common-build-errors` + `sdk-workload-resolution` | SDK/workload errors — missing SDK, TFM issues |
-| `FS####` | `common-build-errors` | F# compiler errors |
-| `BC####` | `common-build-errors` | VB compiler errors |
-
 ### By Failure Category
 | Category | Skill to Consult |
 |----------|-----------------|
-| NuGet restore failures | `nuget-restore-failures` |
-| SDK or workload not found | `sdk-workload-resolution` |
-| TFM compatibility / multi-targeting | `multitarget-tfm-issues` |
 | Output path conflicts / intermittent failures | `check-bin-obj-clash` |
 | Slow builds (not errors, but performance) | `build-perf-diagnostics` |
 | Incremental build broken (rebuilds everything) | `incremental-build` |
@@ -274,11 +261,11 @@ After identifying errors from binlog analysis, consult these specialized skills 
 ### Common Error Patterns Quick-Lookup
 When binlog analysis reveals these patterns, here's the fast path:
 
-1. **"Package X could not be found"** → Check `nuget-restore-failures` for feed/auth issues
-2. **"The imported project was not found" (MSB4019)** → Check `sdk-workload-resolution` for SDK install
-3. **"Reference assemblies not found" (MSB3644)** → Missing targeting pack, check `sdk-workload-resolution`
-4. **"Found conflicts between different versions" (MSB3277)** → Check `common-build-errors` for binding redirect guidance
-5. **"Package downgrade detected" (NU1605)** → Check `nuget-restore-failures` for version resolution
+1. **"Package X could not be found"** → Check NuGet feed configuration and authentication
+2. **"The imported project was not found" (MSB4019)** → Check SDK install and global.json configuration
+3. **"Reference assemblies not found" (MSB3644)** → Missing targeting pack, install the required workload
+4. **"Found conflicts between different versions" (MSB3277)** → Check binding redirects and package version alignment
+5. **"Package downgrade detected" (NU1605)** → Check package version resolution and constraints
 6. **Multiple evaluation of same project** → Check `eval-performance` for overbuilding diagnosis
 7. **Build succeeds but is very slow** → Use `build-perf-diagnostics` and the `build-perf` agent
 
