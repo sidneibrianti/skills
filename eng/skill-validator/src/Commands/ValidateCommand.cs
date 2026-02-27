@@ -453,8 +453,8 @@ public static class ValidateCommand
         var skillSessionId = Guid.NewGuid().ToString("N");
 
         // Register sessions before running
-        sessionDb?.RegisterSession(baselineSessionId, skill.Name, skill.Path, scenario.Name, runIndex, "baseline", config.Model, null, null);
-        sessionDb?.RegisterSession(skillSessionId, skill.Name, skill.Path, scenario.Name, runIndex, "with-skill", config.Model, null, null);
+        sessionDb?.RegisterSession(baselineSessionId, skill.Name, skill.Path, scenario.Name, runIndex, "baseline", config.Model, null, null, scenario.Prompt, skill.SkillMdContent);
+        sessionDb?.RegisterSession(skillSessionId, skill.Name, skill.Path, scenario.Name, runIndex, "with-skill", config.Model, null, null, scenario.Prompt, skill.SkillMdContent);
 
         var agentTasks = await Task.WhenAll(
             AgentRunner.RunAgent(new RunOptions(scenario, null, skill.EvalPath, config.Model, config.Verbose, runLog,
