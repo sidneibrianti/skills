@@ -217,7 +217,7 @@ public static class ValidateCommand
         }
 
         await Reporter.ReportResults(verdicts, config.Reporters, config.Verbose,
-            config.Model, config.JudgeModel, config.ResultsDir);
+            config.Model, config.JudgeModel, config.ResultsDir, timestampedResultsDir);
 
         await AgentRunner.StopSharedClient();
         await AgentRunner.CleanupWorkDirs(config.KeepSessions);
