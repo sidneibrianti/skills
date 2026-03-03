@@ -29,14 +29,20 @@ public static class AgentRunner
         {
             if (_sharedClient is not null) return _sharedClient;
 
-            var options = new CopilotClientOptions
-            {
-                LogLevel = verbose ? "info" : "none",
-            };
 
-            var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-            if (!string.IsNullOrEmpty(githubToken))
-                options.GitHubToken = githubToken;
+            var options = new CopilotClientOptions();
+            if (DockerCopilotServer.Instance is {} dockerServer)
+            {
+                _workDirs.Add(dockerServer.GetHostDir());
+                options.CliUrl = await dockerServer.GetCliUrlAsync();
+            }
+            else
+            {
+                options.LogLevel = verbose ? "info" : "none";
+                var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+                if (!string.IsNullOrEmpty(githubToken))
+                    options.GitHubToken = githubToken;
+            }
 
             _sharedClient = new CopilotClient(options);
             await _sharedClient.StartAsync();
@@ -82,6 +88,9 @@ public static class AgentRunner
 
         if (string.IsNullOrEmpty(reqPath)) return true;
 
+        if (DockerCopilotServer.Instance is {} dockerServer && dockerServer.TryMapContainerPathToHost(reqPath, out var mappedPath))
+            reqPath = mappedPath;
+
         var resolved = Path.GetFullPath(reqPath);
         var allowedDirs = new List<string> { Path.GetFullPath(workDir) };
         if (skillPath is not null) allowedDirs.Add(Path.GetFullPath(skillPath));
@@ -95,10 +104,11 @@ public static class AgentRunner
         SkillInfo? skill, string model, string workDir,
         IReadOnlyDictionary<string, MCPServerDef>? mcpServers = null)
     {
+        var parentDir = DockerCopilotServer.Instance?.GetHostDir() ?? Path.GetTempPath();
         var skillPath = skill is not null ? Path.GetDirectoryName(skill.Path) : null;
 
         // Create a unique temporary config directory for this session to not share any data
-        var configDir = Path.Combine(Path.GetTempPath(), $"skill-validator-cfg-{Guid.NewGuid():N}");
+        var configDir = Path.Combine(parentDir, $"skill-validator-cfg-{Guid.NewGuid():N}");
         Directory.CreateDirectory(configDir);
         _workDirs.Add(configDir);
 
@@ -122,13 +132,19 @@ public static class AgentRunner
             }
         }
 
+        var sessionWorkDir = DockerCopilotServer.Instance?.MapHostPathToContainer(workDir) ?? workDir;
+        var sessionSkillPath = skillPath is not null
+            ? (DockerCopilotServer.Instance?.MapHostPathToContainer(skillPath) ?? skillPath)
+            : null;
+        var sessionConfigDir = DockerCopilotServer.Instance?.MapHostPathToContainer(configDir) ?? configDir;
+
         return new SessionConfig
         {
             Model = model,
             Streaming = true,
-            WorkingDirectory = workDir,
-            SkillDirectories = skill is not null ? [skillPath!] : [],
-            ConfigDir = configDir,
+            WorkingDirectory = sessionWorkDir,
+            SkillDirectories = skill is not null ? [sessionSkillPath!] : [],
+            ConfigDir = sessionConfigDir,
             McpServers = sdkMcp,
             InfiniteSessions = new InfiniteSessionConfig { Enabled = false },
             OnPermissionRequest = (request, _) =>
@@ -273,7 +289,8 @@ public static class AgentRunner
 
     private static async Task<string> SetupWorkDir(EvalScenario scenario, string? skillPath, string? evalPath)
     {
-        var workDir = Path.Combine(Path.GetTempPath(), $"skill-validator-{Guid.NewGuid():N}");
+        var parentDir = DockerCopilotServer.Instance?.GetHostDir() ?? Path.GetTempPath();
+        var workDir = Path.Combine(parentDir, $"skill-validator-{Guid.NewGuid():N}");
         Directory.CreateDirectory(workDir);
         _workDirs.Add(workDir);
 
@@ -319,6 +336,13 @@ public static class AgentRunner
             {
                 try
                 {
+                    if (DockerCopilotServer.Instance is {} dockerServer)
+                    {
+                        var containerDir = dockerServer.MapHostPathToContainer(workDir);
+                        await dockerServer.ExecAsync(containerDir, cmd);
+                        continue;
+                    }
+
                     var psi = new ProcessStartInfo
                     {
                         FileName = OperatingSystem.IsWindows() ? "cmd.exe" : "/bin/sh",
