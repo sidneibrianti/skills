@@ -1,17 +1,17 @@
 # Baseline Comparison
 
-Verify the CPM conversion is version-neutral by comparing resolved package versions before and after conversion using `dotnet list package`. Binlogs are also captured as artifacts for manual inspection or troubleshooting.
+Verify the CPM conversion is version-neutral by comparing resolved package versions before and after conversion using `dotnet package list`. Binlogs are also captured as artifacts for manual inspection or troubleshooting.
 
 ## Capturing package lists
 
-Use `dotnet list package` to snapshot resolved versions. Always build from a clean state first to ensure accurate resolution.
+Use `dotnet package list` to snapshot resolved versions. Always build from a clean state first to ensure accurate resolution.
 
 ### Baseline (before conversion, step 2)
 
 ```bash
 dotnet clean
 dotnet build -bl:baseline.binlog
-dotnet list package --format json > baseline-packages.json
+dotnet package list --format json > baseline-packages.json
 ```
 
 ### Post-conversion (after all changes, step 8)
@@ -19,13 +19,13 @@ dotnet list package --format json > baseline-packages.json
 ```bash
 dotnet clean
 dotnet build -bl:after-cpm.binlog
-dotnet list package --format json > after-cpm-packages.json
+dotnet package list --format json > after-cpm-packages.json
 ```
 
 If `--format json` is not available (requires .NET 8 SDK+), use the default tabular output:
 
 ```bash
-dotnet list package > baseline-packages.txt
+dotnet package list > baseline-packages.txt
 ```
 
 For solution-scoped conversions, pass the solution file to all commands.

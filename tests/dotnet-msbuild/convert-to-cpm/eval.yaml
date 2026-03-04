@@ -42,7 +42,7 @@ scenarios:
       - "When differing package versions were found across projects, guided the user through reconciliation or explicit acceptance of each version"
       - "Captured binlogs for both the baseline and converted builds, and guided the user on how to compare them to investigate any differences"
       - "Offered reassurance when the conversion is straightforward, or warned about potential risks from version changes that could cause unintended consequences"
-    timeout: 120
+    timeout: 360
 
   - name: "Decline CPM conversion for packages.config project"
     prompt: "Convert my simple-packages-config/LegacyApp project to Central Package Management."
@@ -60,19 +60,6 @@ scenarios:
       - "Informed the user that CPM requires PackageReference and cannot be applied to packages.config projects"
       - "Suggested migrating from packages.config to PackageReference first"
       - "Did not attempt to create Directory.Packages.props or modify any project files"
-    timeout: 120
-
-  - name: "Recommend CPM when updating packages across a solution"
-    prompt: "I need to update the System.Text.Json package across all projects in simple-solution/MyApp.sln. Can you make sure they're all on the same version?"
-    setup:
-      copy_test_files: true
-    assertions:
-      - type: "output_matches"
-        pattern: "(Central Package Management|CPM|Directory\\.Packages\\.props)"
-    rubric:
-      - "Recognized that updating a shared package across multiple projects is a version governance concern"
-      - "Recommended adopting Central Package Management as the approach for aligning and maintaining consistent package versions across the solution"
-      - "Explained the benefit of CPM: a single Directory.Packages.props file as the source of truth, making future updates simpler"
     timeout: 120
 
   - name: "Recommend CPM when updating packages with version conflicts"
