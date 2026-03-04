@@ -14,10 +14,27 @@ If a `PackageReference` is inside a conditional `<ItemGroup>` (e.g., `Condition=
 
 ## 3. Same package with different versions
 
-If the same package ID appears with different versions across projects, record all versions. The default strategy is to use the highest version.
+If the same package ID appears with different versions across projects, this is a **version conflict** that requires a user decision before proceeding. CPM requires a single `<PackageVersion>` per package (unless `VersionOverride` is used), so conflicts must be resolved.
 
-- **Major version difference**: Ask the user to confirm — may indicate intentional pinning.
-- **Minor or patch difference**: Prefer the highest version but note the change — a patch-level difference may indicate a security fix.
+For each conflict, present a focused summary showing:
+
+- The package name and all distinct versions found
+- Which projects use each version, so the user can see the scope of the disagreement
+- Whether the difference is major, minor, or patch — this signals the level of risk
+- Any known security advisories on the lower versions (cross-reference with `dotnet list package --vulnerable` if available)
+
+Then present the resolution options with their trade-offs:
+
+1. **Align to the highest version** — simplest path; all projects get the latest. Risk: a major version bump may introduce breaking API changes in projects that were on an older version.
+2. **Align to the lowest version** — conservative; avoids pulling in untested changes. Risk: projects already on higher versions would be downgraded, which may break them or regress security fixes.
+3. **Use `VersionOverride`** — projects that need a different version keep it via `VersionOverride` in their project file. The central `<PackageVersion>` holds the default. This preserves the status quo but partially undermines centralization for that package.
+4. **Upgrade to a specific version** — when a security advisory exists, recommend at least the minimum patched version. Explain the advisory briefly and note which projects are affected.
+
+Ask the user to choose for **each** conflict individually. Do not silently pick a strategy. After each decision, briefly restate what will happen: which projects will see a version change, and which will stay the same.
+
+- **Major version difference**: Emphasize the risk of breaking API changes. Recommend `VersionOverride` unless the user is prepared to validate all affected projects.
+- **Minor or patch difference**: Prefer the highest version but highlight any security advisories. Note that patch-level alignment is usually safe.
+- **One version is vulnerable**: Recommend upgrading and explain the advisory. If the user chooses to keep the vulnerable version, note it as a risk in the summary report.
 
 ## 4. Known security advisories
 

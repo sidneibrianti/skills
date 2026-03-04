@@ -21,7 +21,7 @@ scenarios:
     timeout: 120
 
   - name: "Convert multi-project solution to CPM"
-    prompt: "I'd like to convert simple-solution/MyApp.sln to Central Package Management."
+    prompt: "I'd like to convert simple-solution/MyApp.sln to Central Package Management. Use the highest version for any conflicts."
     setup:
       copy_test_files: true
     assertions:
@@ -62,8 +62,53 @@ scenarios:
       - "Did not attempt to create Directory.Packages.props or modify any project files"
     timeout: 120
 
+  - name: "Recommend CPM when updating packages across a solution"
+    prompt: "I need to update the System.Text.Json package across all projects in simple-solution/MyApp.sln. Can you make sure they're all on the same version?"
+    setup:
+      copy_test_files: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(Central Package Management|CPM|Directory\\.Packages\\.props)"
+    rubric:
+      - "Recognized that updating a shared package across multiple projects is a version governance concern"
+      - "Recommended adopting Central Package Management as the approach for aligning and maintaining consistent package versions across the solution"
+      - "Explained the benefit of CPM: a single Directory.Packages.props file as the source of truth, making future updates simpler"
+    timeout: 120
+
+  - name: "Recommend CPM when updating packages with version conflicts"
+    prompt: "The System.Text.Json and Azure.Identity packages have gotten out of sync across projects in moderate-version-conflicts/Inventory.slnx. Can you align them to the latest versions?"
+    setup:
+      copy_test_files: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(Central Package Management|CPM|Directory\\.Packages\\.props)"
+      - type: "output_matches"
+        pattern: "(conflict|mismatch|different version|out of sync)"
+    rubric:
+      - "Identified the version conflicts across projects before attempting any changes"
+      - "Strongly recommended adopting Central Package Management to prevent versions from drifting apart again in the future"
+      - "Explained that without CPM, manually aligning versions across projects is error-prone and the same drift will likely recur"
+      - "Offered to perform the CPM conversion as part of resolving the version alignment request"
+    timeout: 180
+
+  - name: "Recommend CPM when updating packages in a complex repository"
+    prompt: "I need to update and align NuGet package versions across the advanced-multi-complexity/Enterprise.slnx solution. Package versions have drifted out of sync — some are defined as MSBuild properties, some are conditional for multi-targeting, and there's a shared Common.props. Can you bump everything to the latest and get them consistent?"
+    setup:
+      copy_test_files: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(Central Package Management|CPM|Directory\\.Packages\\.props)"
+      - type: "output_matches"
+        pattern: "(BlobsVersion|HostingVersion|Common\\.props)"
+    rubric:
+      - "Audited the repository complexity: MSBuild property-based versions, conditional references, shared props files, and version conflicts across projects"
+      - "Strongly recommended adopting Central Package Management as essential for a repository of this complexity — manual package updates across scattered version definitions are high-risk and unsustainable"
+      - "Explained that CPM would consolidate the MSBuild properties, conditional versions, and shared props references into a single governed file, greatly reducing the risk of version drift and update errors"
+      - "Offered to perform the full CPM conversion rather than making piecemeal version updates that would leave the underlying governance problem unresolved"
+    timeout: 360
+
   - name: "Convert solution with MSBuild property versions to CPM"
-    prompt: "Convert moderate-msbuild-properties/Platform.sln to Central Package Management. The package versions are currently defined as MSBuild properties in Directory.Build.props."
+    prompt: "Convert moderate-msbuild-properties/Platform.sln to Central Package Management. The package versions are currently defined as MSBuild properties in Directory.Build.props. Inline the resolved values into Directory.Packages.props and use the highest version for any conflicts."
     setup:
       copy_test_files: true
     assertions:
@@ -77,7 +122,7 @@ scenarios:
       - "Traced each MSBuild property (OTelVersion, DIVersion) to its definition in Directory.Build.props"
       - "Clearly showed which packages use properties vs literal versions"
       - "Asked the user whether to inline the resolved values or keep the property references"
-      - "Created Directory.Packages.props with the user's chosen approach"
+      - "Created Directory.Packages.props with inlined resolved values as directed by the user"
       - "Removed only the version-related properties from Directory.Build.props, preserving the OutputPath property"
       - "Verified no remaining references to removed properties exist"
       - "Ran dotnet restore and dotnet build to validate the conversion"
@@ -88,7 +133,7 @@ scenarios:
     timeout: 180
 
   - name: "Convert solution with version conflicts to CPM"
-    prompt: "Convert moderate-version-conflicts/Inventory.slnx to Central Package Management."
+    prompt: "Convert moderate-version-conflicts/Inventory.slnx to Central Package Management. Use the highest version for any conflicts."
     setup:
       copy_test_files: true
     assertions:
@@ -104,9 +149,8 @@ scenarios:
       - "Audited all 4 projects and identified both version conflicts (System.Text.Json and Azure.Identity)"
       - "Presented the System.Text.Json conflict clearly: 10.0.1 in Api/Shared/Tests vs 8.0.4 in Worker"
       - "Presented the Azure.Identity conflict: 1.13.2 in Api vs 1.10.0 in Shared"
-      - "Asked the user how to resolve each conflict rather than silently picking a version"
-      - "Offered options such as aligning to the highest version or using VersionOverride"
-      - "Created Directory.Packages.props reflecting the user's chosen resolution strategy"
+      - "Applied the user's chosen strategy of aligning to the highest version for each conflict"
+      - "Created Directory.Packages.props with the highest version for each conflicting package"
       - "Ran dotnet restore and dotnet build to validate the conversion"
       - "Produced a markdown report summarizing all package references and resolved versions across projects, comparing baseline state against the CPM result"
       - "Guided the user through reconciliation or explicit acceptance of each differing version, surfacing the rationale and impact of each choice"
@@ -115,7 +159,7 @@ scenarios:
     timeout: 180
 
   - name: "Convert complex repository with multiple CPM challenges"
-    prompt: "I need to convert this entire repository to Central Package Management. The solution is at advanced-multi-complexity/Enterprise.slnx. There are some complications: package versions defined as MSBuild properties, conditional package references for multi-targeting, and a shared Common.props that adds a package to all projects."
+    prompt: "I need to convert this entire repository to Central Package Management. The solution is at advanced-multi-complexity/Enterprise.slnx. There are some complications: package versions defined as MSBuild properties, conditional package references for multi-targeting, and a shared Common.props that adds a package to all projects. Inline MSBuild property values and use the highest version for any conflicts."
     setup:
       copy_test_files: true
     assertions:
@@ -136,8 +180,8 @@ scenarios:
       - "Traced MSBuild properties (BlobsVersion, HostingVersion) to their definitions in Directory.Build.props"
       - "Identified the conditional PackageReference for Microsoft.AspNetCore.Mvc.NewtonsoftJson with different versions per TFM"
       - "Identified the PackageReference in Common.props that applies to all projects"
-      - "Asked the user about each decision point separately rather than making silent choices"
-      - "Created Directory.Packages.props reflecting all user decisions"
+      - "Presented the findings and applied the user's chosen strategy of using the highest version for conflicts and inlining MSBuild property values"
+      - "Created Directory.Packages.props reflecting the user's directed resolution strategy"
       - "Preserved non-version properties (LangVersion, ImplicitUsings) in Directory.Build.props"
       - "Ran dotnet restore and dotnet build to validate the conversion"
       - "Produced a markdown report summarizing all package references, resolved versions, and decisions across projects, comparing baseline state against the CPM result"
