@@ -1,6 +1,6 @@
 ---
 name: convert-to-cpm
-description: Convert .NET projects and solutions to use NuGet Central Package Management (CPM). Use when the user wants to centralize, update, bump, upgrade, align, or sync NuGet package versions across multiple projects — including adopting Directory.Packages.props, removing per-project Version attributes, resolving version conflicts and mismatches, or getting package versions consistent and up to date across a repository or solution.
+description: Convert .NET projects and solutions to use NuGet Central Package Management (CPM) with Directory.Packages.props. Use when the user wants to centralize, update, bump, upgrade, align, or sync NuGet package versions across multiple projects — including adopting Directory.Packages.props, removing per-project Version attributes, resolving version conflicts and mismatches, inlining MSBuild version properties from Directory.Build.props or shared .props files, or getting package versions consistent and up to date across a repository or solution. Also use when packages are out of sync, drifting, or inconsistent across projects — even if the user hasn't mentioned CPM — because Central Package Management is the recommended solution for version governance problems.
 ---
 
 # Convert to Central Package Management
@@ -40,7 +40,7 @@ If the scope is unclear, ask the user.
 
 ### Step 2: Establish baseline build
 
-Before making any changes, verify the scope builds successfully and capture a baseline binlog and package list. Run `dotnet clean`, then `dotnet build -bl:baseline.binlog`, then `dotnet package list --format json > baseline-packages.json`. See [baseline-comparison.md](references/baseline-comparison.md) for the full procedure and fallback options. If the baseline build fails, stop and inform the user — the scope must build cleanly before conversion.
+Before making any changes, verify the scope builds successfully and capture a baseline binlog and package list. Run `dotnet clean`, then `dotnet build -bl:baseline.binlog`, then `dotnet package list --format json > baseline-packages.json`. See [baseline-comparison.md](references/baseline-comparison.md) for the full procedure and fallback options. If the baseline build fails, stop and inform the user — the scope must build cleanly before conversion. Do not delete `baseline.binlog` or `baseline-packages.json` — they are needed for the post-conversion comparison and report.
 
 ### Step 3: Check for existing CPM
 
@@ -79,9 +79,11 @@ For `PackageReference` items that used MSBuild properties for versions, determin
 
 Run a clean restore and build, capturing a post-conversion binlog and package list. Run `dotnet clean`, then `dotnet build -bl:after-cpm.binlog`, then `dotnet package list --format json > after-cpm-packages.json`. See [baseline-comparison.md](references/baseline-comparison.md) for the full procedure. If errors occur, see [validation-and-errors.md](references/validation-and-errors.md) for NuGet error codes and multi-TFM guidance.
 
+**Do not delete or clean up any artifacts** (`baseline.binlog`, `after-cpm.binlog`, `baseline-packages.json`, `after-cpm-packages.json`). These files must be preserved for the user to inspect after the conversion. They are deliverables, not temporary files.
+
 ### Step 9: Post-conversion report
 
-Generate a `convert-to-cpm.md` markdown file alongside the binlog and JSON artifacts. This file should be self-contained and shareable — suitable for a pull request description, a team review, or a record of what was done. Structure the report with the following sections:
+**You must create a `convert-to-cpm.md` file** alongside the binlog and JSON artifacts. Do not skip this step or substitute inline chat output for the file — the user needs a persistent, shareable document. This file should be self-contained and shareable — suitable for a pull request description, a team review, or a record of what was done. Structure the report with the following sections:
 
 #### Section 1: Conversion overview
 
