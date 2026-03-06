@@ -164,18 +164,22 @@ public partial class DockerCopilotServer
 
         // Check work dir mount
         var hostDir = GetHostDir();
-        if (fullPath.StartsWith(hostDir, StringComparison.OrdinalIgnoreCase))
+        var relativeToWork = Path.GetRelativePath(hostDir, fullPath);
+        if (!Path.IsPathRooted(relativeToWork) &&
+            !relativeToWork.StartsWith(".." + Path.DirectorySeparatorChar, StringComparison.Ordinal) &&
+            relativeToWork != "..")
         {
-            var relativePath = Path.GetRelativePath(hostDir, fullPath);
-            return Path.Combine("/work", relativePath).Replace("\\", "/");
+            return Path.Combine("/work", relativeToWork).Replace("\\", "/");
         }
 
         // Check skill dir mounts
         foreach (var (hostSkillDir, containerMount) in _skillMounts)
         {
-            if (fullPath.StartsWith(hostSkillDir, StringComparison.OrdinalIgnoreCase))
+            var relativePath = Path.GetRelativePath(hostSkillDir, fullPath);
+            if (!Path.IsPathRooted(relativePath) &&
+                !relativePath.StartsWith(".." + Path.DirectorySeparatorChar, StringComparison.Ordinal) &&
+                relativePath != "..")
             {
-                var relativePath = Path.GetRelativePath(hostSkillDir, fullPath);
                 return Path.Combine(containerMount, relativePath).Replace("\\", "/");
             }
         }
@@ -225,18 +229,18 @@ public partial class DockerCopilotServer
 
     private async Task<ContainerState> StartAsync(CancellationToken ct = default)
     {
-        var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN")
-            ?? throw new InvalidOperationException("GITHUB_TOKEN environment variable is required when running in Docker. You can get it with 'gh auth token'.");
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_TOKEN")))
+            throw new InvalidOperationException("GITHUB_TOKEN environment variable is required when running in Docker. You can get it with 'gh auth token'.");
 
         if (_verbose)
             Console.Error.WriteLine("🐳 Building Docker image ...");
 
         var sdkVersion = GetCopilotSdkVersion();
         var imageName = $"{ImageBaseName}:{sdkVersion}";
-        var dockerFilePath = Path.Combine(AppContext.BaseDirectory, "docker", "Dockerfile");
+        var dockerFilePath = Path.Combine(AppContext.BaseDirectory, "Docker", "Dockerfile");
 
         await RunDockerCommandAsync(
-            ["build", "-t", imageName, "--build-arg", $"COPILOT_SDK_VERSION={sdkVersion}", "-f", dockerFilePath, "."], ct);
+            ["build", "-t", imageName, "--build-arg", $"COPILOT_SDK_VERSION={sdkVersion}", "-f", dockerFilePath, Path.GetDirectoryName(dockerFilePath)!], ct);
 
         if (_verbose)
             Console.Error.WriteLine("🐳 Docker image built successfully.");
@@ -246,18 +250,21 @@ public partial class DockerCopilotServer
         if (_verbose)
             Console.Error.WriteLine($"🐳 Starting container {containerName}...");
 
+        var hostDir = GetHostDir();
+        Directory.CreateDirectory(hostDir);
+
         var runArgs = new List<string>
         {
             "run",
             "--name", containerName,
             "-p", $"0:{InternalPort}", // Map internal port to a random host port
-            "-e", $"GITHUB_TOKEN={githubToken}",
-            "-v", $"{GetHostDir()}:/work", // Mount host dir to /work in container
+            "-e", "GITHUB_TOKEN",
+            "-v", $"{hostDir}:/work", // Mount host dir to /work in container
         };
 
         // Mount skill directories as read-only volumes
-        foreach (var (hostDir, containerMount) in _skillMounts)
-            runArgs.AddRange(["-v", $"{hostDir}:{containerMount}:ro"]);
+        foreach (var (hostSkillDir, containerMount) in _skillMounts)
+            runArgs.AddRange(["-v", $"{hostSkillDir}:{containerMount}:ro"]);
 
         runArgs.AddRange([
             imageName,
