@@ -204,7 +204,7 @@ public partial class DockerCopilotServer
     {
         _ = await GetOrStartContainerAsync(ct);
 
-        await RunDockerCommandAsync(["exec", GetContainerName(), "--workdir", workDir, "/bin/sh", "-c", command], ct);
+        await RunDockerCommandAsync(["exec", "--workdir", workDir, GetContainerName(), "/bin/sh", "-c", command], ct);
     }
 
     private async Task<ContainerState> GetOrStartContainerAsync(CancellationToken ct = default)
