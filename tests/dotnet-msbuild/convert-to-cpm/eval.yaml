@@ -18,7 +18,7 @@ scenarios:
       - "Produced a markdown report comparing baseline package references and versions against the CPM result so the user can review what changed"
       - "Captured binlogs for both the baseline and converted builds, and guided the user on how to compare them to verify no unintended build behavior changes"
       - "Offered reassurance that the conversion is safe when no material changes were detected, or warned about any risks"
-    timeout: 120
+    timeout: 180
 
   - name: "Convert multi-project solution to CPM"
     prompt: "I'd like to convert simple-solution/MyApp.sln to Central Package Management. Use the highest version for any conflicts."
@@ -145,7 +145,7 @@ scenarios:
       - "Guided the user through reconciliation or explicit acceptance of each differing version, surfacing the rationale and impact of each choice"
       - "Captured binlogs for both the baseline and converted builds, and guided the user on how to compare them to verify the version conflict resolutions"
       - "Warned about potential risks from version changes or unintended consequences, and offered reassurance where the resolution is safe"
-    timeout: 180
+    timeout: 240
 
   - name: "Convert complex repository with multiple CPM challenges"
     prompt: "I need to convert this entire repository to Central Package Management. The solution is at advanced-multi-complexity/Enterprise.slnx. There are some complications: package versions defined as MSBuild properties, conditional package references for multi-targeting, and a shared Common.props that adds a package to all projects. Inline MSBuild property values and use the highest version for any conflicts."

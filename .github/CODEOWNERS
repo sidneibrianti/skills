@@ -10,6 +10,9 @@
 /tests/dotnet-msbuild/ @ViktorHofer @JanKrivanek
 /agentic-workflows/dotnet-msbuild/ @ViktorHofer @JanKrivanek
 
+/plugins/dotnet-msbuild/skills/convert-to-cpm/ @dotnet/area-infrastructure-libraries
+/tests/dotnet-msbuild/convert-to-cpm/ @dotnet/area-infrastructure-libraries
+
 /plugins/dotnet/skills/analyzing-dotnet-performance/ @dotnet/dotnet-diag
 /tests/dotnet/analyzing-dotnet-performance/ @dotnet/dotnet-diag
 
