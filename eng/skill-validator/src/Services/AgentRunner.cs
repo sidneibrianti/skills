@@ -118,7 +118,7 @@ public static class AgentRunner
         var skillPath = skill is not null ? Path.GetDirectoryName(skill.Path) : null;
 
         // Create a unique temporary config directory for this session to not share any data
-        var configDir = Path.Combine(parentDir, $"skill-validator-cfg-{Guid.NewGuid():N}");
+        var configDir = Path.Combine(parentDir, $"sv-cfg-{Guid.NewGuid():N}");
         Directory.CreateDirectory(configDir);
         _workDirs.Add(configDir);
 
@@ -305,7 +305,7 @@ public static class AgentRunner
     private static async Task<string> SetupWorkDir(EvalScenario scenario, string? skillPath, string? evalPath)
     {
         var parentDir = DockerCopilotServer.Instance?.GetHostDir() ?? Path.GetTempPath();
-        var workDir = Path.Combine(parentDir, $"skill-validator-{Guid.NewGuid():N}");
+        var workDir = Path.Combine(parentDir, $"sv-{Guid.NewGuid():N}");
         Directory.CreateDirectory(workDir);
         _workDirs.Add(workDir);
 
