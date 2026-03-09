@@ -182,6 +182,37 @@
             "overfittingScore": 0.45
           }
         ]
+      },
+      {
+        "benches": [
+          {
+            "overfitting": "moderate",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Time",
+            "overfittingScore": 0.39,
+            "unit": "seconds",
+            "value": 15.7
+          },
+          {
+            "overfitting": "moderate",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Tokens In",
+            "overfittingScore": 0.39,
+            "unit": "tokens",
+            "value": 25238.0
+          }
+        ],
+        "tool": "customSmallerIsBetter",
+        "model": "claude-opus-4.6",
+        "date": 1773074707614,
+        "commit": {
+          "id": "d709e0b55a53e8636841abc0d9785a5142bfce31",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Jan Krivanek"
+          },
+          "message": "Add checking for orphaned skills/plugins (#291)",
+          "timestamp": "2026-03-09T13:23:07+00:00",
+          "url": "https://github.com/dotnet/skills/commit/d709e0b55a53e8636841abc0d9785a5142bfce31"
+        }
       }
     ],
     "Quality": [
@@ -356,9 +387,38 @@
             "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Vanilla Quality"
           }
         ]
+      },
+      {
+        "benches": [
+          {
+            "overfitting": "moderate",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Quality",
+            "overfittingScore": 0.39,
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          }
+        ],
+        "tool": "customBiggerIsBetter",
+        "model": "claude-opus-4.6",
+        "date": 1773074707614,
+        "commit": {
+          "id": "d709e0b55a53e8636841abc0d9785a5142bfce31",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Jan Krivanek"
+          },
+          "message": "Add checking for orphaned skills/plugins (#291)",
+          "timestamp": "2026-03-09T13:23:07+00:00",
+          "url": "https://github.com/dotnet/skills/commit/d709e0b55a53e8636841abc0d9785a5142bfce31"
+        }
       }
     ]
   },
   "repoUrl": "",
-  "lastUpdate": 1773064005628
+  "lastUpdate": 1773074707614
 }
