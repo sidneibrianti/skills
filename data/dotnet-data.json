@@ -151,6 +151,37 @@
           },
           "id": "dcdad225a92701bf599f471748ca00da2a7affe9"
         }
+      },
+      {
+        "model": "claude-opus-4.6",
+        "date": 1773064005628,
+        "tool": "customSmallerIsBetter",
+        "commit": {
+          "message": "Workaround gh-aw concurrency group issue (#290)",
+          "url": "https://github.com/dotnet/skills/commit/a9335d41166f49fbbce91a8462e98afda5ef5d8c",
+          "timestamp": "2026-03-09T10:55:18+00:00",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Jan Krivanek"
+          },
+          "id": "a9335d41166f49fbbce91a8462e98afda5ef5d8c"
+        },
+        "benches": [
+          {
+            "value": 16.9,
+            "unit": "seconds",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Time",
+            "overfitting": "moderate",
+            "overfittingScore": 0.45
+          },
+          {
+            "value": 25305.0,
+            "unit": "tokens",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Tokens In",
+            "overfitting": "moderate",
+            "overfittingScore": 0.45
+          }
+        ]
       }
     ],
     "Quality": [
@@ -296,9 +327,38 @@
           },
           "id": "dcdad225a92701bf599f471748ca00da2a7affe9"
         }
+      },
+      {
+        "model": "claude-opus-4.6",
+        "date": 1773064005628,
+        "tool": "customBiggerIsBetter",
+        "commit": {
+          "message": "Workaround gh-aw concurrency group issue (#290)",
+          "url": "https://github.com/dotnet/skills/commit/a9335d41166f49fbbce91a8462e98afda5ef5d8c",
+          "timestamp": "2026-03-09T10:55:18+00:00",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Jan Krivanek"
+          },
+          "id": "a9335d41166f49fbbce91a8462e98afda5ef5d8c"
+        },
+        "benches": [
+          {
+            "value": 9.199999809265137,
+            "unit": "Score (0-10)",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Quality",
+            "overfitting": "moderate",
+            "overfittingScore": 0.45
+          },
+          {
+            "value": 9.199999809265137,
+            "unit": "Score (0-10)",
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Vanilla Quality"
+          }
+        ]
       }
     ]
   },
   "repoUrl": "",
-  "lastUpdate": 1773041571758
+  "lastUpdate": 1773064005628
 }
