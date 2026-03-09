@@ -244,6 +244,37 @@
           }
         ],
         "model": "claude-opus-4.6"
+      },
+      {
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "unit": "seconds",
+            "overfitting": "moderate",
+            "overfittingScore": 0.24,
+            "value": 30.6,
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "overfitting": "moderate",
+            "overfittingScore": 0.24,
+            "value": 25223.0,
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Tokens In"
+          }
+        ],
+        "date": 1773095188070,
+        "commit": {
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)",
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188"
+        },
+        "model": "claude-opus-4.6"
       }
     ],
     "Quality": [
@@ -476,9 +507,38 @@
           }
         ],
         "model": "claude-opus-4.6"
+      },
+      {
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "unit": "Score (0-10)",
+            "overfitting": "moderate",
+            "overfittingScore": 0.24,
+            "value": 8.800000190734863,
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863,
+            "name": "optimizing-ef-core-queries/Optimize bulk operations with EF Core 7+ ExecuteUpdate and ExecuteDelete - Vanilla Quality"
+          }
+        ],
+        "date": 1773095188070,
+        "commit": {
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)",
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188"
+        },
+        "model": "claude-opus-4.6"
       }
     ]
   },
   "repoUrl": "",
-  "lastUpdate": 1773084519094
+  "lastUpdate": 1773095188070
 }

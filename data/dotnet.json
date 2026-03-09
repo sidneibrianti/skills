@@ -35029,6 +35029,85 @@
           }
         ],
         "model": "claude-opus-4.6"
+      },
+      {
+        "tool": "customBiggerIsBetter",
+        "benches": [
+          {
+            "unit": "Score (0-10)",
+            "overfitting": "moderate",
+            "overfittingScore": 0.36,
+            "value": 9.199999809265137,
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 4.800000190734863,
+            "name": "csharp-scripts/Test a C# language feature with a script - Vanilla Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863,
+            "name": "nuget-trusted-publishing/Set up trusted publishing for a new NuGet library - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 6.0,
+            "name": "nuget-trusted-publishing/Set up trusted publishing for a new NuGet library - Vanilla Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727,
+            "name": "nuget-trusted-publishing/Set up NuGet publishing without mentioning trusted publishing - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 4.400000095367432,
+            "name": "nuget-trusted-publishing/Set up NuGet publishing without mentioning trusted publishing - Vanilla Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137,
+            "name": "nuget-trusted-publishing/Migrate existing workflow from API key to trusted publishing - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 5.599999904632568,
+            "name": "nuget-trusted-publishing/Migrate existing workflow from API key to trusted publishing - Vanilla Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 10.0,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 6.400000095367432,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Vanilla Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 10.0,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Quality"
+          },
+          {
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Vanilla Quality"
+          }
+        ],
+        "date": 1773095187816,
+        "commit": {
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)",
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188"
+        },
+        "model": "claude-opus-4.6"
       }
     ],
     "Efficiency": [
@@ -72091,8 +72170,89 @@
           }
         ],
         "model": "claude-opus-4.6"
+      },
+      {
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "unit": "seconds",
+            "overfitting": "moderate",
+            "overfittingScore": 0.36,
+            "value": 47.7,
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "overfitting": "moderate",
+            "overfittingScore": 0.36,
+            "value": 133226.0,
+            "name": "csharp-scripts/Test a C# language feature with a script - Skilled Tokens In"
+          },
+          {
+            "unit": "seconds",
+            "value": 66.3,
+            "name": "nuget-trusted-publishing/Set up trusted publishing for a new NuGet library - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "value": 116610.0,
+            "name": "nuget-trusted-publishing/Set up trusted publishing for a new NuGet library - Skilled Tokens In"
+          },
+          {
+            "unit": "seconds",
+            "value": 56.1,
+            "name": "nuget-trusted-publishing/Set up NuGet publishing without mentioning trusted publishing - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "value": 100200.0,
+            "name": "nuget-trusted-publishing/Set up NuGet publishing without mentioning trusted publishing - Skilled Tokens In"
+          },
+          {
+            "unit": "seconds",
+            "value": 30.0,
+            "name": "nuget-trusted-publishing/Migrate existing workflow from API key to trusted publishing - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "value": 65515.0,
+            "name": "nuget-trusted-publishing/Migrate existing workflow from API key to trusted publishing - Skilled Tokens In"
+          },
+          {
+            "unit": "seconds",
+            "value": 20.2,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "value": 47954.0,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET 8+) - Skilled Tokens In"
+          },
+          {
+            "unit": "seconds",
+            "value": 19.7,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Time"
+          },
+          {
+            "unit": "tokens",
+            "value": 37085.0,
+            "name": "dotnet-pinvoke/Generate LibraryImport declaration from C header (.NET Framework) - Skilled Tokens In"
+          }
+        ],
+        "date": 1773095187816,
+        "commit": {
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)",
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188"
+        },
+        "model": "claude-opus-4.6"
       }
     ]
   },
-  "lastUpdate": 1773084518838
+  "lastUpdate": 1773095187816
 }

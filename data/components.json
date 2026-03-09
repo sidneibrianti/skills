@@ -1,6 +1,7 @@
 [
   "dotnet-data",
   "dotnet-diag",
+  "dotnet-maui",
   "dotnet-msbuild",
   "dotnet-upgrade",
   "dotnet"
