@@ -5916,6 +5916,559 @@
         },
         "model": "claude-opus-4.6",
         "tool": "customSmallerIsBetter"
+      },
+      {
+        "commit": {
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)"
+        },
+        "model": "claude-opus-4.6",
+        "benches": [
+          {
+            "name": "dotnet-trace-collect/High CPU in Kubernetes on Linux (.NET 8) - Skilled Time",
+            "unit": "seconds",
+            "value": 41.5
+          },
+          {
+            "name": "dotnet-trace-collect/High CPU in Kubernetes on Linux (.NET 8) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 92087.0
+          },
+          {
+            "name": "dotnet-trace-collect/.NET Framework on Windows without admin privileges - Skilled Time",
+            "unit": "seconds",
+            "value": 25.6
+          },
+          {
+            "name": "dotnet-trace-collect/.NET Framework on Windows without admin privileges - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 31143.0
+          },
+          {
+            "name": "dotnet-trace-collect/.NET 10 on Linux with root access and native call stacks - Skilled Time",
+            "unit": "seconds",
+            "value": 36.6
+          },
+          {
+            "name": "dotnet-trace-collect/.NET 10 on Linux with root access and native call stacks - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 99219.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on Linux (.NET 8) - Skilled Time",
+            "unit": "seconds",
+            "value": 39.7
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on Linux (.NET 8) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 58472.0
+          },
+          {
+            "name": "dotnet-trace-collect/Slow requests on Windows with PerfView - Skilled Time",
+            "unit": "seconds",
+            "value": 23.9
+          },
+          {
+            "name": "dotnet-trace-collect/Slow requests on Windows with PerfView - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 43741.0
+          },
+          {
+            "name": "dotnet-trace-collect/Excessive GC on Linux (.NET 8) - Skilled Time",
+            "unit": "seconds",
+            "value": 29.2
+          },
+          {
+            "name": "dotnet-trace-collect/Excessive GC on Linux (.NET 8) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 72985.0
+          },
+          {
+            "name": "dotnet-trace-collect/Hang or deadlock diagnosis on Linux - Skilled Time",
+            "unit": "seconds",
+            "value": 30.4
+          },
+          {
+            "name": "dotnet-trace-collect/Hang or deadlock diagnosis on Linux - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 47578.0
+          },
+          {
+            "name": "dotnet-trace-collect/Windows container high CPU with PerfView - Skilled Time",
+            "unit": "seconds",
+            "value": 32.1
+          },
+          {
+            "name": "dotnet-trace-collect/Windows container high CPU with PerfView - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 74154.0
+          },
+          {
+            "name": "dotnet-trace-collect/Long-running intermittent issue with PerfView triggers - Skilled Time",
+            "unit": "seconds",
+            "value": 32.8
+          },
+          {
+            "name": "dotnet-trace-collect/Long-running intermittent issue with PerfView triggers - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 59646.0
+          },
+          {
+            "name": "dotnet-trace-collect/Linux pre-.NET 10 needing native call stacks - Skilled Time",
+            "unit": "seconds",
+            "value": 37.0
+          },
+          {
+            "name": "dotnet-trace-collect/Linux pre-.NET 10 needing native call stacks - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 88372.0
+          },
+          {
+            "name": "dotnet-trace-collect/Windows modern .NET with admin high CPU - Skilled Time",
+            "unit": "seconds",
+            "value": 24.4
+          },
+          {
+            "name": "dotnet-trace-collect/Windows modern .NET with admin high CPU - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 62712.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on .NET Framework Windows - Skilled Time",
+            "unit": "seconds",
+            "value": 38.5
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on .NET Framework Windows - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 52843.0
+          },
+          {
+            "name": "dotnet-trace-collect/Kubernetes with console access prefers console tools - Skilled Time",
+            "unit": "seconds",
+            "value": 28.0
+          },
+          {
+            "name": "dotnet-trace-collect/Kubernetes with console access prefers console tools - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 57917.0
+          },
+          {
+            "name": "dotnet-trace-collect/Container installation without .NET SDK - Skilled Time",
+            "unit": "seconds",
+            "value": 45.5
+          },
+          {
+            "name": "dotnet-trace-collect/Container installation without .NET SDK - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 95271.0
+          },
+          {
+            "name": "dotnet-trace-collect/HTTP 500s from downstream service on Linux (.NET 8) - Skilled Time",
+            "unit": "seconds",
+            "value": 34.0
+          },
+          {
+            "name": "dotnet-trace-collect/HTTP 500s from downstream service on Linux (.NET 8) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 62540.0
+          },
+          {
+            "name": "dotnet-trace-collect/Networking timeouts on Windows with admin (.NET 8) - Skilled Time",
+            "unit": "seconds",
+            "value": 32.2
+          },
+          {
+            "name": "dotnet-trace-collect/Networking timeouts on Windows with admin (.NET 8) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 52370.0
+          },
+          {
+            "timedOut": true,
+            "name": "microbenchmarking/Investigate runtime upgrade performance impact - Skilled Time",
+            "unit": "seconds",
+            "value": 466.9
+          },
+          {
+            "timedOut": true,
+            "name": "microbenchmarking/Investigate runtime upgrade performance impact - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 392463.0
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose unexpected FOD dialog from native build tool - Skilled Time",
+            "unit": "seconds",
+            "value": 55.8
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose unexpected FOD dialog from native build tool - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 78033.0
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose FOD suppressed but activation still failing - Skilled Time",
+            "unit": "seconds",
+            "value": 51.2
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose FOD suppressed but activation still failing - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 71223.0
+          },
+          {
+            "name": "clr-activation-debugging/Explain why same binary behaves differently under different launch methods - Skilled Time",
+            "unit": "seconds",
+            "value": 42.2
+          },
+          {
+            "name": "clr-activation-debugging/Explain why same binary behaves differently under different launch methods - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 71449.0
+          },
+          {
+            "name": "clr-activation-debugging/Analyze healthy managed EXE activation - Skilled Time",
+            "unit": "seconds",
+            "value": 35.3
+          },
+          {
+            "name": "clr-activation-debugging/Analyze healthy managed EXE activation - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 55462.0
+          },
+          {
+            "name": "clr-activation-debugging/Identify multiple activation sequences in a single log - Skilled Time",
+            "unit": "seconds",
+            "value": 90.2
+          },
+          {
+            "name": "clr-activation-debugging/Identify multiple activation sequences in a single log - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 77310.0
+          },
+          {
+            "name": "clr-activation-debugging/Explain useLegacyV2RuntimeActivationPolicy in activation log - Skilled Time",
+            "unit": "seconds",
+            "value": 17.1
+          },
+          {
+            "name": "clr-activation-debugging/Explain useLegacyV2RuntimeActivationPolicy in activation log - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 30829.0
+          },
+          {
+            "name": "clr-activation-debugging/Decline non-CLR-activation issue - Skilled Time",
+            "unit": "seconds",
+            "value": 15.6
+          },
+          {
+            "name": "clr-activation-debugging/Decline non-CLR-activation issue - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 12579.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects compiled regex startup budget and regex chain allocations - Skilled Time",
+            "unit": "seconds",
+            "value": 112.5
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects compiled regex startup budget and regex chain allocations - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 120565.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects CurrentCulture comparer and compiled regex budget in inflection rules - Skilled Time",
+            "unit": "seconds",
+            "value": 109.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects CurrentCulture comparer and compiled regex budget in inflection rules - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 123466.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Finds per-call Dictionary allocation not hoisted to static - Skilled Time",
+            "unit": "seconds",
+            "value": 102.4
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Finds per-call Dictionary allocation not hoisted to static - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 124141.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Catches compound allocations in recursive number converter with ToLower - Skilled Time",
+            "unit": "seconds",
+            "value": 98.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Catches compound allocations in recursive number converter with ToLower - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 126070.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds StringComparison.Ordinal missing and FrozenDictionary opportunities - Skilled Time",
+            "unit": "seconds",
+            "value": 84.1
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds StringComparison.Ordinal missing and FrozenDictionary opportunities - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 131649.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects Aggregate+Replace chain and struct missing IEquatable - Skilled Time",
+            "unit": "seconds",
+            "value": 108.6
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects Aggregate+Replace chain and struct missing IEquatable - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 155456.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds branched Replace chain in format string manipulation - Skilled Time",
+            "unit": "seconds",
+            "value": 140.7
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds branched Replace chain in format string manipulation - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 125800.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Catches LINQ on hot-path string processing and All(char.IsUpper) - Skilled Time",
+            "unit": "seconds",
+            "value": 126.6
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Catches LINQ on hot-path string processing and All(char.IsUpper) - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 134240.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects LINQ pipeline in TimeSpan formatting and collection processing - Skilled Time",
+            "unit": "seconds",
+            "value": 101.6
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects LINQ pipeline in TimeSpan formatting and collection processing - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 112626.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Flags Span inconsistencies and compound method chains in truncation library - Skilled Time",
+            "unit": "seconds",
+            "value": 101.9
+          },
+          {
+            "name": "analyzing-dotnet-performance/Flags Span inconsistencies and compound method chains in truncation library - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 140436.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Identifies unsealed leaf classes and locale hierarchy patterns - Skilled Time",
+            "unit": "seconds",
+            "value": 101.4
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Identifies unsealed leaf classes and locale hierarchy patterns - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 157778.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate .NET frames in an Android tombstone - Skilled Time",
+            "unit": "seconds",
+            "value": 57.9
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate .NET frames in an Android tombstone - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 96666.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize tombstone with no .NET frames - Skilled Time",
+            "unit": "seconds",
+            "value": 16.4
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize tombstone with no .NET frames - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 43351.0
+          },
+          {
+            "timedOut": true,
+            "name": "android-tombstone-symbolication/Symbolicate CoreCLR frames in an Android tombstone - Skilled Time",
+            "unit": "seconds",
+            "value": 68.7
+          },
+          {
+            "timedOut": true,
+            "name": "android-tombstone-symbolication/Symbolicate CoreCLR frames in an Android tombstone - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 126849.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize NativeAOT tombstone with app binary and libSystem.Native.so - Skilled Time",
+            "unit": "seconds",
+            "value": 116.1
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize NativeAOT tombstone with app binary and libSystem.Native.so - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 127362.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate multi-thread tombstone - Skilled Time",
+            "unit": "seconds",
+            "value": 51.6
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate multi-thread tombstone - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 118630.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Handle .NET frames with no BuildId metadata - Skilled Time",
+            "unit": "seconds",
+            "value": 36.1
+          },
+          {
+            "name": "android-tombstone-symbolication/Handle .NET frames with no BuildId metadata - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 79647.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate tombstone with multiple .NET libraries and different BuildIds - Skilled Time",
+            "unit": "seconds",
+            "value": 108.1
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate tombstone with multiple .NET libraries and different BuildIds - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 131584.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Reject iOS crash log as wrong format - Skilled Time",
+            "unit": "seconds",
+            "value": 24.2
+          },
+          {
+            "name": "android-tombstone-symbolication/Reject iOS crash log as wrong format - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 26390.0
+          },
+          {
+            "name": "dump-collect/Configure automatic crash dumps for CoreCLR app on Linux - Skilled Time",
+            "unit": "seconds",
+            "value": 33.3
+          },
+          {
+            "name": "dump-collect/Configure automatic crash dumps for CoreCLR app on Linux - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 91511.0
+          },
+          {
+            "name": "dump-collect/Set up NativeAOT crash dumps with createdump in Kubernetes - Skilled Time",
+            "unit": "seconds",
+            "value": 26.9
+          },
+          {
+            "name": "dump-collect/Set up NativeAOT crash dumps with createdump in Kubernetes - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 55958.0
+          },
+          {
+            "name": "dump-collect/Recover crash dump from macOS NativeAOT without createdump - Skilled Time",
+            "unit": "seconds",
+            "value": 36.1
+          },
+          {
+            "name": "dump-collect/Recover crash dump from macOS NativeAOT without createdump - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 91294.0
+          },
+          {
+            "name": "dump-collect/Configure CoreCLR dump collection in Alpine Docker as non-root - Skilled Time",
+            "unit": "seconds",
+            "value": 36.2
+          },
+          {
+            "name": "dump-collect/Configure CoreCLR dump collection in Alpine Docker as non-root - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 80608.0
+          },
+          {
+            "name": "dump-collect/Advisory: macOS NativeAOT crash dump recovery steps - Skilled Time",
+            "unit": "seconds",
+            "value": 24.3
+          },
+          {
+            "name": "dump-collect/Advisory: macOS NativeAOT crash dump recovery steps - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 57460.0
+          },
+          {
+            "name": "dump-collect/Advisory: CoreCLR Alpine Docker non-root configuration - Skilled Time",
+            "unit": "seconds",
+            "value": 23.2
+          },
+          {
+            "name": "dump-collect/Advisory: CoreCLR Alpine Docker non-root configuration - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 54007.0
+          },
+          {
+            "name": "dump-collect/Advisory: NativeAOT Kubernetes dump collection setup - Skilled Time",
+            "unit": "seconds",
+            "value": 35.9
+          },
+          {
+            "name": "dump-collect/Advisory: NativeAOT Kubernetes dump collection setup - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 67512.0
+          },
+          {
+            "name": "dump-collect/Detect runtime and configure crash dumps for unknown .NET app on Linux - Skilled Time",
+            "unit": "seconds",
+            "value": 39.9
+          },
+          {
+            "name": "dump-collect/Detect runtime and configure crash dumps for unknown .NET app on Linux - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 79202.0
+          },
+          {
+            "name": "dump-collect/Decline dump analysis request - Skilled Time",
+            "unit": "seconds",
+            "value": 15.6
+          },
+          {
+            "name": "dump-collect/Decline dump analysis request - Skilled Tokens In",
+            "unit": "tokens",
+            "value": 17618.0
+          }
+        ],
+        "tool": "customSmallerIsBetter",
+        "date": 1773118304659
       }
     ],
     "Quality": [
@@ -11561,9 +12114,554 @@
         },
         "model": "claude-opus-4.6",
         "tool": "customBiggerIsBetter"
+      },
+      {
+        "commit": {
+          "id": "ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "timestamp": "2026-03-09T20:34:19+00:00",
+          "author": {
+            "username": "JanKrivanek",
+            "name": "Gerald Versluis"
+          },
+          "url": "https://github.com/dotnet/skills/commit/ebe71e2f0658337286b36a8d1e8a5ad5bf008188",
+          "message": "Add dotnet-maui plugin with dotnet-maui-doctor skill (#199)"
+        },
+        "model": "claude-opus-4.6",
+        "benches": [
+          {
+            "name": "dotnet-trace-collect/High CPU in Kubernetes on Linux (.NET 8) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "dotnet-trace-collect/High CPU in Kubernetes on Linux (.NET 8) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "dotnet-trace-collect/.NET Framework on Windows without admin privileges - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/.NET Framework on Windows without admin privileges - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 5.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/.NET 10 on Linux with root access and native call stacks - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "dotnet-trace-collect/.NET 10 on Linux with root access and native call stacks - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on Linux (.NET 8) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on Linux (.NET 8) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 5.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/Slow requests on Windows with PerfView - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/Slow requests on Windows with PerfView - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "dotnet-trace-collect/Excessive GC on Linux (.NET 8) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "dotnet-trace-collect/Excessive GC on Linux (.NET 8) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "dotnet-trace-collect/Hang or deadlock diagnosis on Linux - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/Hang or deadlock diagnosis on Linux - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "dotnet-trace-collect/Windows container high CPU with PerfView - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "dotnet-trace-collect/Windows container high CPU with PerfView - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.4000000953674316
+          },
+          {
+            "name": "dotnet-trace-collect/Long-running intermittent issue with PerfView triggers - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "dotnet-trace-collect/Long-running intermittent issue with PerfView triggers - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 4.800000190734863
+          },
+          {
+            "name": "dotnet-trace-collect/Linux pre-.NET 10 needing native call stacks - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/Linux pre-.NET 10 needing native call stacks - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 5.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/Windows modern .NET with admin high CPU - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "dotnet-trace-collect/Windows modern .NET with admin high CPU - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 4.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on .NET Framework Windows - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/Memory leak on .NET Framework Windows - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.800000190734863
+          },
+          {
+            "name": "dotnet-trace-collect/Kubernetes with console access prefers console tools - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/Kubernetes with console access prefers console tools - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "dotnet-trace-collect/Container installation without .NET SDK - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/Container installation without .NET SDK - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 7.599999904632568
+          },
+          {
+            "name": "dotnet-trace-collect/HTTP 500s from downstream service on Linux (.NET 8) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dotnet-trace-collect/HTTP 500s from downstream service on Linux (.NET 8) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "dotnet-trace-collect/Networking timeouts on Windows with admin (.NET 8) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "dotnet-trace-collect/Networking timeouts on Windows with admin (.NET 8) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 4.0
+          },
+          {
+            "timedOut": true,
+            "name": "microbenchmarking/Investigate runtime upgrade performance impact - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "microbenchmarking/Investigate runtime upgrade performance impact - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 3.200000047683716
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose unexpected FOD dialog from native build tool - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose unexpected FOD dialog from native build tool - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose FOD suppressed but activation still failing - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Diagnose FOD suppressed but activation still failing - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "clr-activation-debugging/Explain why same binary behaves differently under different launch methods - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Explain why same binary behaves differently under different launch methods - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "clr-activation-debugging/Analyze healthy managed EXE activation - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Analyze healthy managed EXE activation - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "clr-activation-debugging/Identify multiple activation sequences in a single log - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Identify multiple activation sequences in a single log - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "clr-activation-debugging/Explain useLegacyV2RuntimeActivationPolicy in activation log - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 6.800000190734863
+          },
+          {
+            "name": "clr-activation-debugging/Explain useLegacyV2RuntimeActivationPolicy in activation log - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 4.800000190734863
+          },
+          {
+            "name": "clr-activation-debugging/Decline non-CLR-activation issue - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "clr-activation-debugging/Decline non-CLR-activation issue - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects compiled regex startup budget and regex chain allocations - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects compiled regex startup budget and regex chain allocations - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.799999952316284
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects CurrentCulture comparer and compiled regex budget in inflection rules - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects CurrentCulture comparer and compiled regex budget in inflection rules - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Finds per-call Dictionary allocation not hoisted to static - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds per-call Dictionary allocation not hoisted to static - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Catches compound allocations in recursive number converter with ToLower - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "analyzing-dotnet-performance/Catches compound allocations in recursive number converter with ToLower - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds StringComparison.Ordinal missing and FrozenDictionary opportunities - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds StringComparison.Ordinal missing and FrozenDictionary opportunities - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Detects Aggregate+Replace chain and struct missing IEquatable - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects Aggregate+Replace chain and struct missing IEquatable - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds branched Replace chain in format string manipulation - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Finds branched Replace chain in format string manipulation - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Catches LINQ on hot-path string processing and All(char.IsUpper) - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "analyzing-dotnet-performance/Catches LINQ on hot-path string processing and All(char.IsUpper) - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects LINQ pipeline in TimeSpan formatting and collection processing - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "analyzing-dotnet-performance/Detects LINQ pipeline in TimeSpan formatting and collection processing - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "analyzing-dotnet-performance/Flags Span inconsistencies and compound method chains in truncation library - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "analyzing-dotnet-performance/Flags Span inconsistencies and compound method chains in truncation library - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "timedOut": true,
+            "name": "analyzing-dotnet-performance/Identifies unsealed leaf classes and locale hierarchy patterns - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "analyzing-dotnet-performance/Identifies unsealed leaf classes and locale hierarchy patterns - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 2.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate .NET frames in an Android tombstone - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate .NET frames in an Android tombstone - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize tombstone with no .NET frames - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize tombstone with no .NET frames - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "timedOut": true,
+            "name": "android-tombstone-symbolication/Symbolicate CoreCLR frames in an Android tombstone - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate CoreCLR frames in an Android tombstone - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize NativeAOT tombstone with app binary and libSystem.Native.so - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "android-tombstone-symbolication/Recognize NativeAOT tombstone with app binary and libSystem.Native.so - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate multi-thread tombstone - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate multi-thread tombstone - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Handle .NET frames with no BuildId metadata - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "android-tombstone-symbolication/Handle .NET frames with no BuildId metadata - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate tombstone with multiple .NET libraries and different BuildIds - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Symbolicate tombstone with multiple .NET libraries and different BuildIds - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "android-tombstone-symbolication/Reject iOS crash log as wrong format - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "android-tombstone-symbolication/Reject iOS crash log as wrong format - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dump-collect/Configure automatic crash dumps for CoreCLR app on Linux - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 10.0
+          },
+          {
+            "name": "dump-collect/Configure automatic crash dumps for CoreCLR app on Linux - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "dump-collect/Set up NativeAOT crash dumps with createdump in Kubernetes - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "dump-collect/Set up NativeAOT crash dumps with createdump in Kubernetes - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 4.400000095367432
+          },
+          {
+            "name": "dump-collect/Recover crash dump from macOS NativeAOT without createdump - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 6.800000190734863
+          },
+          {
+            "name": "dump-collect/Recover crash dump from macOS NativeAOT without createdump - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 6.0
+          },
+          {
+            "name": "dump-collect/Configure CoreCLR dump collection in Alpine Docker as non-root - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 8.800000190734863
+          },
+          {
+            "name": "dump-collect/Configure CoreCLR dump collection in Alpine Docker as non-root - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.399999618530273
+          },
+          {
+            "name": "dump-collect/Advisory: macOS NativeAOT crash dump recovery steps - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.199999809265137
+          },
+          {
+            "name": "dump-collect/Advisory: macOS NativeAOT crash dump recovery steps - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 8.0
+          },
+          {
+            "name": "dump-collect/Advisory: CoreCLR Alpine Docker non-root configuration - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "dump-collect/Advisory: CoreCLR Alpine Docker non-root configuration - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 7.599999904632568
+          },
+          {
+            "name": "dump-collect/Advisory: NativeAOT Kubernetes dump collection setup - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "dump-collect/Advisory: NativeAOT Kubernetes dump collection setup - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 5.599999904632568
+          },
+          {
+            "name": "dump-collect/Detect runtime and configure crash dumps for unknown .NET app on Linux - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 9.600000381469727
+          },
+          {
+            "name": "dump-collect/Detect runtime and configure crash dumps for unknown .NET app on Linux - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "dump-collect/Decline dump analysis request - Skilled Quality",
+            "unit": "Score (0-10)",
+            "value": 7.199999809265137
+          },
+          {
+            "name": "dump-collect/Decline dump analysis request - Vanilla Quality",
+            "unit": "Score (0-10)",
+            "value": 5.199999809265137
+          }
+        ],
+        "tool": "customBiggerIsBetter",
+        "date": 1773118304659
       }
     ]
   },
   "repoUrl": "",
-  "lastUpdate": 1773106704023
+  "lastUpdate": 1773118304659
 }
